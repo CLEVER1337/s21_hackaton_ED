@@ -68,15 +68,20 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="DocFlow AI", version="1.0.0", lifespan=lifespan)
 
+_cors_env = os.environ.get("CORS_ORIGINS", "*").strip()
+if _cors_env in ("", "*"):
+    _cors_kwargs = {"allow_origin_regex": ".*"}
+else:
+    _cors_kwargs = {
+        "allow_origins": [o.strip() for o in _cors_env.split(",") if o.strip()],
+    }
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    **_cors_kwargs,
 )
 
 
