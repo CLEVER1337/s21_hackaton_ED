@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-kzn-cream text-kzn-ink font-sans antialiased;
+}
+
+:root {
+  color-scheme: light;
+}
+
+/* Скролл в аккуратных цветах палитры */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: #cfc6ae;
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #b5ac94;
+}
+
+/* spinner */
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  @apply inline-block w-4 h-4 rounded-full border-2 border-current border-r-transparent;
+  animation: spin-slow 0.9s linear infinite;
+}

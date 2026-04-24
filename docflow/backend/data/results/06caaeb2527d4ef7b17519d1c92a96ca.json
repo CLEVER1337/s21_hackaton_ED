@@ -1,0 +1,24 @@
+{
+  "doc_id": "06caaeb2527d4ef7b17519d1c92a96ca",
+  "filename": "Шк119 А 24г.pdf",
+  "file_size": 798744,
+  "file_type": "pdf",
+  "status": "error",
+  "created_at": "2026-04-24T08:38:30.438845",
+  "updated_at": "2026-04-24T08:38:30.887598",
+  "data": {
+    "document_type": "",
+    "document_number": "",
+    "document_date": "",
+    "supplier_name": "",
+    "supplier_inn": "",
+    "buyer_name": "",
+    "buyer_inn": "",
+    "total_amount": "",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": []
+  },
+  "validation_errors": [],
+  "error_message": "Сбой GigaChat API: 400 https://ngw.devices.sberbank.ru:9443/api/v2/oauth: b'{\"code\":7,\"message\":\"scope from db not fully includes consumed scope\"}', Headers([('server', 'SynGX'), ('date', 'Fri, 24 Apr 2026 08:38:30 GMT'), ('content-type', 'application/json'), ('content-length', '70'), ('connection', 'keep-alive'), ('vary', 'Origin'), ('vary', 'Access-Control-Request-Method'), ('vary', 'Access-Control-Request-Headers'), ('cache-control', 'no-cache, no-store, max-age=0, must-revalidate'), ('pragma', 'no-cache'), ('expires', '0'), ('x-content-type-options', 'nosniff'), ('strict-transport-security', 'max-age=31536000 ; includeSubDomains'), ('x-frame-options', 'DENY'), ('x-xss-protection', '0'), ('referrer-policy', 'no-referrer'), ('allow', 'GET, POST'), ('strict-transport-security', 'max-age=31536000; includeSubDomains')])"
+}

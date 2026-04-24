@@ -1,0 +1,24 @@
+{
+  "doc_id": "92a4aa3f783f4292b1c413bf5e230a99",
+  "filename": "нак_1337523__простор.pdf",
+  "file_size": 566691,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T08:25:44.374443",
+  "updated_at": "2026-04-24T08:25:44.770731",
+  "data": {
+    "document_type": "",
+    "document_number": "",
+    "document_date": "",
+    "supplier_name": "",
+    "supplier_inn": "",
+    "buyer_name": "",
+    "buyer_inn": "",
+    "total_amount": "",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": []
+  },
+  "validation_errors": [],
+  "error_message": ""
+}
