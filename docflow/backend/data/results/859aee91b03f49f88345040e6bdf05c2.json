@@ -1,0 +1,43 @@
+{
+  "doc_id": "859aee91b03f49f88345040e6bdf05c2",
+  "filename": "сад 22 А_Счет фактура_2021г.pdf",
+  "file_size": 1099684,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T11:59:36.009774",
+  "updated_at": "2026-04-24T12:00:05.456239",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "20",
+    "document_date": "19.04.2020",
+    "supplier_name": "Индивидуальный Предприниматель Ефимова Любовь Александровна",
+    "supplier_inn": "165714545507",
+    "buyer_name": "МБДОУ \"Детокий Сад №22 Комбинированного Вида\"",
+    "buyer_inn": "1661042347",
+    "total_amount": "4350.00",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Стена Для Вао Родитали 80-80ем 1",
+        "quantity": "1",
+        "unit": "шт",
+        "unit_price": "3800.00",
+        "total_price": "3800.00"
+      },
+      {
+        "name": "Таблинка информацнон нам. 40г20см",
+        "quantity": "1",
+        "unit": "шт",
+        "unit_price": "550.00",
+        "total_price": "550.00"
+      }
+    ]
+  },
+  "validation_errors": [
+    "vat_amount: не удалось распознать сумму НДС"
+  ],
+  "error_message": "",
+  "retry_count": 1,
+  "completeness": 0.95
+}

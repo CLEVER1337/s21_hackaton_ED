@@ -1,0 +1,26 @@
+{
+  "doc_id": "f42c4ffe5e3d42e993c5d47a8759af08",
+  "filename": "Дс14 А 21г.pdf",
+  "file_size": 926562,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T11:59:36.009774",
+  "updated_at": "2026-04-24T12:00:00.136368",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "",
+    "document_date": "19.08.2021",
+    "supplier_name": "Управление образования Исполнительного комитета муниципального образования города",
+    "supplier_inn": "",
+    "buyer_name": "МБДОУ «Детский сад №14»",
+    "buyer_inn": "",
+    "total_amount": "",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": []
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 0,
+  "completeness": 0.5
+}

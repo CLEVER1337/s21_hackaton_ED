@@ -1,0 +1,41 @@
+{
+  "doc_id": "e8173517f048451eb1a9bcd101bdda1c",
+  "filename": "Накл._на_сумму_90920_Шк.153 (2022).pdf",
+  "file_size": 650924,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T11:53:30.133833",
+  "updated_at": "2026-04-24T11:53:56.989009",
+  "data": {
+    "document_type": "счет",
+    "document_number": "67",
+    "document_date": "04.10.2022",
+    "supplier_name": "ИП Молчанов Роман Юрьевич",
+    "supplier_inn": "165802595553",
+    "buyer_name": "МБОУ \"СОШ №153\"",
+    "buyer_inn": "1656001497",
+    "total_amount": "909.20",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Ручка шариковая масляная STAFF \"ОВР-317\", ЧЕРНАЯ, корпус матовый, игольчатый узел 0,6 мм, линия пись",
+        "quantity": "20",
+        "unit": "шт",
+        "unit_price": "12.40",
+        "total_price": "248.00"
+      },
+      {
+        "name": "Клей-карандаш BRAUBERG SUPER, 15 г, 229541",
+        "quantity": "12",
+        "unit": "шт",
+        "unit_price": "55.10",
+        "total_price": "661.20"
+      }
+    ]
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 0,
+  "completeness": 0.95
+}

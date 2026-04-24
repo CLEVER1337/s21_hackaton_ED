@@ -20,8 +20,8 @@ from fastapi.responses import FileResponse, JSONResponse, Response
 
 import storage
 from export import export as export_document_bytes
+from file_compression import maybe_compress_file_for_gigachat
 from gigachat_client import GigaChatClient, GigaChatError
-from image_upscale import UpscaleError, maybe_upscale_file
 from models import (
     DocumentData,
     DocumentRecord,
@@ -121,7 +121,6 @@ def _check_limits(file_type: str, size: int) -> None:
 
 
 MAX_AUTO_RETRIES = int(os.environ.get("MAX_AUTO_RETRIES", 3))
-AI_QUALITY_THRESHOLD = float(os.environ.get("AI_QUALITY_THRESHOLD", 0.8))
 
 
 def _is_retryable(exc: BaseException) -> bool:
@@ -203,122 +202,90 @@ async def _process_document_background(doc_id: str) -> None:
         last_error: Optional[str] = None
         attempts = 1 + MAX_AUTO_RETRIES  # первая попытка + 3 авто-ретрая
         raw: Optional[dict] = None
+        source_for_gigachat = upload_path
+        tmp_compressed: Optional[Path] = None
 
-        for attempt in range(1, attempts + 1):
-            try:
-                async with asyncio.timeout(PROCESS_TIMEOUT_SECONDS):
-                    raw = await gigachat_client.process_document(
-                        str(upload_path), record.file_type
+        try:
+            tmp_compressed = await maybe_compress_file_for_gigachat(
+                upload_path, record.file_type, doc_id
+            )
+            if tmp_compressed:
+                source_for_gigachat = tmp_compressed
+
+            for attempt in range(1, attempts + 1):
+                try:
+                    async with asyncio.timeout(PROCESS_TIMEOUT_SECONDS):
+                        raw = await gigachat_client.process_document(
+                            str(source_for_gigachat), record.file_type
+                        )
+                    last_error = None
+                    break
+                except asyncio.TimeoutError as exc:
+                    last_error = f"Таймаут (>{PROCESS_TIMEOUT_SECONDS} сек)"
+                    logger.warning(
+                        "Timeout %s attempt %d/%d", doc_id, attempt, attempts
                     )
-                last_error = None
-                break
-            except asyncio.TimeoutError as exc:
-                last_error = f"Таймаут (>{PROCESS_TIMEOUT_SECONDS} сек)"
-                logger.warning(
-                    "Timeout %s attempt %d/%d", doc_id, attempt, attempts
-                )
-                if attempt == attempts:
-                    break
-            except GigaChatError as exc:
-                last_error = str(exc)
-                logger.warning(
-                    "GigaChatError %s attempt %d/%d: %s",
-                    doc_id, attempt, attempts, exc,
-                )
-                if not _is_retryable(exc) or attempt == attempts:
-                    break
-            except Exception as exc:  # pragma: no cover
-                last_error = f"Непредвиденная ошибка: {exc}"
-                logger.exception(
-                    "Unexpected error %s attempt %d/%d", doc_id, attempt, attempts
-                )
-                if not _is_retryable(exc) or attempt == attempts:
-                    break
+                    if attempt == attempts:
+                        break
+                except GigaChatError as exc:
+                    last_error = str(exc)
+                    logger.warning(
+                        "GigaChatError %s attempt %d/%d: %s",
+                        doc_id, attempt, attempts, exc,
+                    )
+                    if not _is_retryable(exc) or attempt == attempts:
+                        break
+                except Exception as exc:  # pragma: no cover
+                    last_error = f"Непредвиденная ошибка: {exc}"
+                    logger.exception(
+                        "Unexpected error %s attempt %d/%d", doc_id, attempt, attempts
+                    )
+                    if not _is_retryable(exc) or attempt == attempts:
+                        break
 
-            # backoff before next retry
-            await storage.update_document(doc_id, retry_count=attempt)
-            await asyncio.sleep(min(2 ** attempt, 10))
+                # backoff before next retry
+                await storage.update_document(doc_id, retry_count=attempt)
+                await asyncio.sleep(min(2 ** attempt, 10))
 
-        if raw is None:
+            if raw is None:
+                await storage.update_document(
+                    doc_id,
+                    status="error",
+                    error_message=(
+                        f"Не удалось обработать документ после {attempts} попыток. "
+                        f"Последняя ошибка: {last_error or 'неизвестно'}"
+                    ),
+                    retry_count=attempts,
+                )
+                return
+
+            validated, errors = validate_document(raw or {})
+            completeness = _compute_completeness(validated)
+
+            logger.info(
+                "Document %s parsed: number=%s supplier=%s total=%s items=%d errors=%d completeness=%.2f",
+                doc_id,
+                validated.document_number,
+                validated.supplier_name,
+                validated.total_amount,
+                len(validated.items),
+                len(errors),
+                completeness,
+            )
             await storage.update_document(
                 doc_id,
-                status="error",
-                error_message=(
-                    f"Не удалось обработать документ после {attempts} попыток. "
-                    f"Последняя ошибка: {last_error or 'неизвестно'}"
-                ),
-                retry_count=attempts,
+                status="ready",
+                data=validated,
+                validation_errors=errors,
+                error_message="",
+                completeness=completeness,
             )
-            return
-
-        validated, errors = validate_document(raw or {})
-        completeness = _compute_completeness(validated)
-
-        # If extraction quality is below threshold, try one enhanced pass:
-        # upscale image / rendered PDF pages, then re-run GigaChat once.
-        if completeness < AI_QUALITY_THRESHOLD and record.file_type in ("jpg", "jpeg", "png", "pdf"):
-            tmp_upscaled: Optional[Path] = None
-            try:
-                tmp_upscaled = await maybe_upscale_file(upload_path, record.file_type, doc_id)
-                if tmp_upscaled:
-                    logger.info(
-                        "Low AI quality %.2f for %s; retrying with upscaled file %s",
-                        completeness,
-                        doc_id,
-                        tmp_upscaled,
-                    )
-                    raw_retry = await gigachat_client.process_document(
-                        str(tmp_upscaled),
-                        record.file_type,
-                    )
-                    validated_retry, errors_retry = validate_document(raw_retry or {})
-                    completeness_retry = _compute_completeness(validated_retry)
-                    previous_completeness = completeness
-                    if completeness_retry > completeness:
-                        validated = validated_retry
-                        errors = errors_retry
-                        completeness = completeness_retry
-                        logger.info(
-                            "Upscale retry improved quality for %s: %.2f -> %.2f",
-                            doc_id,
-                            previous_completeness,
-                            completeness_retry,
-                        )
-                    else:
-                        logger.info(
-                            "Upscale retry did not improve quality for %s: %.2f -> %.2f",
-                            doc_id,
-                            previous_completeness,
-                            completeness_retry,
-                        )
-            except (UpscaleError, GigaChatError, asyncio.TimeoutError) as exc:
-                logger.warning("Upscale retry failed for %s: %s", doc_id, exc)
-            except Exception:
-                logger.exception("Unexpected upscale retry failure for %s", doc_id)
-            finally:
-                if tmp_upscaled:
-                    try:
-                        tmp_upscaled.unlink(missing_ok=True)
-                    except OSError:
-                        pass
-        logger.info(
-            "Document %s parsed: number=%s supplier=%s total=%s items=%d errors=%d completeness=%.2f",
-            doc_id,
-            validated.document_number,
-            validated.supplier_name,
-            validated.total_amount,
-            len(validated.items),
-            len(errors),
-            completeness,
-        )
-        await storage.update_document(
-            doc_id,
-            status="ready",
-            data=validated,
-            validation_errors=errors,
-            error_message="",
-            completeness=completeness,
-        )
+        finally:
+            if tmp_compressed:
+                try:
+                    tmp_compressed.unlink(missing_ok=True)
+                except OSError:
+                    pass
 
 
 @app.get("/health")

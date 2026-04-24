@@ -1,0 +1,26 @@
+{
+  "doc_id": "7c1d32a10b3e4603af18e4c53ad86f68",
+  "filename": "39шк-2022-25818,00.pdf",
+  "file_size": 706104,
+  "file_type": "pdf",
+  "status": "approved",
+  "created_at": "2026-04-24T11:55:34.052087",
+  "updated_at": "2026-04-24T11:56:50.736119",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "CL286905",
+    "document_date": "24.10.2022",
+    "supplier_name": "Управление образования Исполнительного комитета муниципального образования города",
+    "supplier_inn": "",
+    "buyer_name": "МАОУ \"Школа №39\"",
+    "buyer_inn": "1234567890",
+    "total_amount": "25818.00",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": []
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 3,
+  "completeness": 0.7
+}

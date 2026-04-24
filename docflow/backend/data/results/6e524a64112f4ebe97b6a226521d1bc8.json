@@ -1,0 +1,41 @@
+{
+  "doc_id": "6e524a64112f4ebe97b6a226521d1bc8",
+  "filename": "Школа №65 М (2022г).pdf",
+  "file_size": 197366,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T11:41:33.258252",
+  "updated_at": "2026-04-24T11:41:56.567683",
+  "data": {
+    "document_type": "счёт",
+    "document_number": "385",
+    "document_date": "18.03.2022",
+    "supplier_name": "ООО \"КУАНТА СИСТЕМ\"",
+    "supplier_inn": "1656106330",
+    "buyer_name": "МБОУ \"Средняя общеобразовательная татарско-русская школа №65 с углубленным изучением отдельных предметов\" Московского района города Казани",
+    "buyer_inn": "1658027444",
+    "total_amount": "5550.00",
+    "vat_amount": "925.00",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Лампочка люминесцентная PHILIPS TLO 38W:54-765 36 шт с цоколем G13, 9 видов трубок 123 Вт, холодный дневной свет",
+        "quantity": "33",
+        "unit": "шт",
+        "unit_price": "195.00",
+        "total_price": "5650.00"
+      },
+      {
+        "name": "Лампочка люминесцентная PHILIPS TL D 36W/841 G13, 30 штук, холодный белый свет",
+        "quantity": "30",
+        "unit": "шт",
+        "unit_price": "161.00",
+        "total_price": "4825.00"
+      }
+    ]
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 1,
+  "completeness": 1.0
+}
