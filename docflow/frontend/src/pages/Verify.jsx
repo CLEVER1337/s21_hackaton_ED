@@ -194,6 +194,7 @@ export default function Verify() {
 
           <VerifyForm
             data={formData}
+            aiData={currentDoc.data}
             errors={currentDoc.validation_errors}
             onChange={handleChange}
             onItemChange={handleItemChange}
