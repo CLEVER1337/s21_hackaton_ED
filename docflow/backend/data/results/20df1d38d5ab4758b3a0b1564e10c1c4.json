@@ -1,0 +1,69 @@
+{
+  "doc_id": "20df1d38d5ab4758b3a0b1564e10c1c4",
+  "filename": "17889,75-cф№ 215517 от 23.03.2026-хозтовары.pdf",
+  "file_size": 1969494,
+  "file_type": "pdf",
+  "status": "approved",
+  "created_at": "2026-04-24T10:42:07.734441",
+  "updated_at": "2026-04-24T10:47:06.480678",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "215517",
+    "document_date": "23.03.2026",
+    "supplier_name": "Общество с ограниченной ответственностью \"Самсон КФ\"",
+    "supplier_inn": "1661003281",
+    "buyer_name": "МБОУ \"Основная Общеобразовательная школа №108\" Советского района г. Казани",
+    "buyer_inn": "1660033420",
+    "total_amount": "17889.75",
+    "vat_amount": "3226.02",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Губки для посуды 9,5х7х3,5см КОМПЛЕКТ 10шт, BIG BLACK КРУПНОПОРИСТЫЙ поролон/абразив LAIMA 608650",
+        "quantity": "2",
+        "unit": "шт",
+        "unit_price": "170.06",
+        "total_price": "340.11"
+      },
+      {
+        "name": "Губки-сапфетки АБРАЗИВНЫЕ 130х90х5мм КОМПЛЕКТ ЭШТ от стойких загрязнений LAIMA К6013, 601564",
+        "quantity": "4",
+        "unit": "шт",
+        "unit_price": "50.43",
+        "total_price": "201.70"
+      },
+      {
+        "name": "Картридж с ЖИДКИМ мылом пеной одноразовый (Tork S4), \"Нейтральное\", синее, 1л, KEMAN 100105",
+        "quantity": "24",
+        "unit": "шт",
+        "unit_price": "523.10",
+        "total_price": "12554.36"
+      },
+      {
+        "name": "Сапфетка из МИКРОФИБРЫ для стекол и зеркал 30х30см зеленая 280 г/м2, LAIMA 603933",
+        "quantity": "6",
+        "unit": "шт",
+        "unit_price": "85.80",
+        "total_price": "514.77"
+      },
+      {
+        "name": "Салфетка из МИКРОФИБРЫ универсальная 40х40см КОМПЛЕКТ 4шт, MULTI PRO COLOUR 280 г/M2, LAIMA 607793",
+        "quantity": "1",
+        "unit": "шт",
+        "unit_price": "438.11",
+        "total_price": "438.11"
+      },
+      {
+        "name": "Салфетки из МИКРОФИБРЫ 30х30см MULTI COLOUR big pack, КОМПЛЕКТ 10шт, 180г/м2 LAIMA HOME 607794",
+        "quantity": "2",
+        "unit": "шт",
+        "unit_price": "307.34",
+        "total_price": "614.68"
+      }
+    ]
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 3,
+  "completeness": 1.0
+}

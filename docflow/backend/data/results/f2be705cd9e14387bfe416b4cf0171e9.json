@@ -1,0 +1,34 @@
+{
+  "doc_id": "f2be705cd9e14387bfe416b4cf0171e9",
+  "filename": "168-12966,10-тн30213 от 11.11.2020-лампа — копия.pdf",
+  "file_size": 282799,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T10:50:11.780982",
+  "updated_at": "2026-04-24T10:50:26.493468",
+  "data": {
+    "document_type": "накладная",
+    "document_number": "30213",
+    "document_date": "11.11.2020",
+    "supplier_name": "ООО\"IД Электроцентр\"",
+    "supplier_inn": "1655375482",
+    "buyer_name": "\"Детский сад №168 комбинированного вида\" Советского района г. Казани",
+    "buyer_inn": "1660147026",
+    "total_amount": "12996.10",
+    "vat_amount": "2166.02",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Лампа люминесцентная G13 T8 18W, 220V, 6500К 1200тт 1440 ЛМ поворотный цоколь (544008) Б0019928 Эра",
+        "quantity": "796",
+        "unit": "шт",
+        "unit_price": "130.00",
+        "total_price": "10830.08"
+      }
+    ]
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 0,
+  "completeness": 1.0
+}

@@ -1,0 +1,99 @@
+{
+  "doc_id": "2859369b036a4f96a276654d15cfe872",
+  "filename": "шк.143_-_400000.pdf",
+  "file_size": 823024,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T10:42:07.734441",
+  "updated_at": "2026-04-24T10:43:28.156745",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "311",
+    "document_date": "14.11.2025",
+    "supplier_name": "ООО \"ЭВЕРЕСТ\"",
+    "supplier_inn": "1660360749",
+    "buyer_name": "МБОУ \"Школа №143\"",
+    "buyer_inn": "1657027522",
+    "total_amount": "40000.00",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Папка-вкладыш с перфорацией (файл) СТАММ А4 35мкм глянцевая",
+        "quantity": "20",
+        "unit": "шт",
+        "unit_price": "450.00",
+        "total_price": "9000.00"
+      },
+      {
+        "name": "Скрепки 28мм Berlingo 100шт цветные карт упаковка",
+        "quantity": "30",
+        "unit": "шт",
+        "unit_price": "89.00",
+        "total_price": "2670.00"
+      },
+      {
+        "name": "Скрепки 50мм Berlingo 100шт никелированные карт упаковка",
+        "quantity": "25",
+        "unit": "шт",
+        "unit_price": "174.00",
+        "total_price": "4350.00"
+      },
+      {
+        "name": "Клейкая лента упаковочная OfficeSpace 48мм*66м 40мкм",
+        "quantity": "20",
+        "unit": "шт",
+        "unit_price": "185.00",
+        "total_price": "3700.00"
+      },
+      {
+        "name": "Клейкая лента 19мм*33м Berlingo кристально-прозрачная",
+        "quantity": "25",
+        "unit": "шт",
+        "unit_price": "55.00",
+        "total_price": "1375.00"
+      },
+      {
+        "name": "Корректирующая жидкость Berlingo 20мл на химической основе с кистью",
+        "quantity": "30",
+        "unit": "шт",
+        "unit_price": "145.00",
+        "total_price": "4350.00"
+      },
+      {
+        "name": "Набор маркеров для белых досок OfficeSpace 04ца пулевидный 2.5мм чехол с европодвесом",
+        "quantity": "15",
+        "unit": "шт",
+        "unit_price": "500.00",
+        "total_price": "7500.00"
+      },
+      {
+        "name": "Самоклеящийся блок OfficeSpace 76*76мм 100л желтый",
+        "quantity": "20",
+        "unit": "шт",
+        "unit_price": "69.00",
+        "total_price": "1380.00"
+      },
+      {
+        "name": "Ножницы Berlingo Easycut 300 17.5см красные, мягкие вставки европодвес",
+        "quantity": "15",
+        "unit": "шт",
+        "unit_price": "298.50",
+        "total_price": "4477.50"
+      },
+      {
+        "name": "Ватман А1 860*610 ЛенГознак 180г/м2",
+        "quantity": "10",
+        "unit": "шт",
+        "unit_price": "119.75",
+        "total_price": "1197.50"
+      }
+    ]
+  },
+  "validation_errors": [
+    "vat_amount: не удалось распознать сумму НДС"
+  ],
+  "error_message": "",
+  "retry_count": 1,
+  "completeness": 0.9833
+}

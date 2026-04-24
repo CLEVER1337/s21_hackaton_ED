@@ -1,0 +1,62 @@
+{
+  "doc_id": "bd57f66d95b44994b1c8aa39b7ee1b70",
+  "filename": "ШК 57 К (2025).pdf",
+  "file_size": 2174274,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T10:42:07.734441",
+  "updated_at": "2026-04-24T10:43:02.733230",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "130",
+    "document_date": "19.06.2025",
+    "supplier_name": "ООО \"Галант Плюс\"",
+    "supplier_inn": "1658192656",
+    "buyer_name": "МБОУ \"ШКОЛА №57\"",
+    "buyer_inn": "1656012844",
+    "total_amount": "18430.00",
+    "vat_amount": "3071.67",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Мыло туалетное 90г ДЕТСКОЕ (Весна), нейтральное без отдушек и красителей",
+        "quantity": "72",
+        "unit": "шт",
+        "unit_price": "33.33",
+        "total_price": "2400.00"
+      },
+      {
+        "name": "Бумага туалетная бытовая \"ИЗ НАБЕРЕЖНЫХ ЧЕЛНОВ\", 53м, без втулки",
+        "quantity": "144",
+        "unit": "шт",
+        "unit_price": "37.50",
+        "total_price": "5400.00"
+      },
+      {
+        "name": "Полотенца бумажные бытовые спайка 2шт, 2-х слойные, (2х18м) LAIA 22х23см белые",
+        "quantity": "6",
+        "unit": "шт",
+        "unit_price": "335.67",
+        "total_price": "2014.00"
+      },
+      {
+        "name": "Салфетки (24х24) (90) белые КБК 1/42",
+        "quantity": "50",
+        "unit": "шт",
+        "unit_price": "66.67",
+        "total_price": "3333.33"
+      },
+      {
+        "name": "Мешки для мусора 30л OfficeClean ПНД 50*60см 10мкм 30шт, прочные черные, в рулоне",
+        "quantity": "18",
+        "unit": "шт",
+        "unit_price": "122.83",
+        "total_price": "2211.00"
+      }
+    ]
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 2,
+  "completeness": 1.0
+}
