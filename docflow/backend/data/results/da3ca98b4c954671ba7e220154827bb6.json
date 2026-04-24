@@ -1,0 +1,26 @@
+{
+  "doc_id": "da3ca98b4c954671ba7e220154827bb6",
+  "filename": "305-2142-сфвр00700758от13.12.21-.pdf",
+  "file_size": 239940,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T12:00:49.562709",
+  "updated_at": "2026-04-24T12:01:02.630846",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "VR00700758",
+    "document_date": "13.12.2021",
+    "supplier_name": "МАДОУ \"Детский сад №305\"",
+    "supplier_inn": "",
+    "buyer_name": "",
+    "buyer_inn": "",
+    "total_amount": "",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": []
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 1,
+  "completeness": 0.5
+}

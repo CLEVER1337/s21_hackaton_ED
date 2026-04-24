@@ -1,0 +1,26 @@
+{
+  "doc_id": "98cbebfa05a242dba501ca4a362ac922",
+  "filename": "10 школа 30.12.2021_Товарная_накладная.pdf",
+  "file_size": 90172,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T12:01:24.401718",
+  "updated_at": "2026-04-24T12:01:35.471025",
+  "data": {
+    "document_type": "накладная",
+    "document_number": "100000025C018/60",
+    "document_date": "30.12.2021",
+    "supplier_name": "МБОУ \"Школа №10\"",
+    "supplier_inn": "",
+    "buyer_name": "",
+    "buyer_inn": "",
+    "total_amount": "",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": []
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 0,
+  "completeness": 0.5
+}

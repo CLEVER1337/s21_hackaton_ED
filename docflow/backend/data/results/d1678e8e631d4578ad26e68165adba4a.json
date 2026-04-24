@@ -1,0 +1,26 @@
+{
+  "doc_id": "d1678e8e631d4578ad26e68165adba4a",
+  "filename": "Дс 217 М (2022).pdf",
+  "file_size": 403884,
+  "file_type": "pdf",
+  "status": "error",
+  "created_at": "2026-04-24T11:53:30.133833",
+  "updated_at": "2026-04-24T12:05:13.299530",
+  "data": {
+    "document_type": "",
+    "document_number": "",
+    "document_date": "",
+    "supplier_name": "",
+    "supplier_inn": "",
+    "buyer_name": "",
+    "buyer_inn": "",
+    "total_amount": "",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": []
+  },
+  "validation_errors": [],
+  "error_message": "Не удалось обработать документ после 4 попыток. Последняя ошибка: Сбой GigaChat API: The read operation timed out",
+  "retry_count": 4,
+  "completeness": 0.0
+}

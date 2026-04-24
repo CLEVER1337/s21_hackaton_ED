@@ -1,0 +1,26 @@
+{
+  "doc_id": "a57137634cf942719bce633943202e99",
+  "filename": "29600_р_380_дс.pdf",
+  "file_size": 1273398,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T12:00:49.562709",
+  "updated_at": "2026-04-24T12:01:24.206563",
+  "data": {
+    "document_type": "иное",
+    "document_number": "",
+    "document_date": "09.12.2021",
+    "supplier_name": "МАДОУ «Детский сад № 380»",
+    "supplier_inn": "",
+    "buyer_name": "",
+    "buyer_inn": "",
+    "total_amount": "",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": []
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 3,
+  "completeness": 0.4
+}

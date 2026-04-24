@@ -1,0 +1,41 @@
+{
+  "doc_id": "680288f2b79b48fcab74070b517ef05a",
+  "filename": "131_10300,00.pdf",
+  "file_size": 1760510,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T10:46:53.608145",
+  "updated_at": "2026-04-24T10:47:32.032158",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "21",
+    "document_date": "22.05.2025",
+    "supplier_name": "МАДОУ \"Детский сад №131 Приволжского района г. Казани\"",
+    "supplier_inn": "1659076780",
+    "buyer_name": "Муниципальное автономное дошкольное образовательное учреждение \"Детский сад №131 комбинированного вида\" Приволжского района г. Казани",
+    "buyer_inn": "1659076700",
+    "total_amount": "10300.00",
+    "vat_amount": "1716.67",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Окончание 19 н № 2100%",
+        "quantity": "50",
+        "unit": "-",
+        "unit_price": "106.07",
+        "total_price": "5333.33"
+      },
+      {
+        "name": "Передано в эксплуатацию (или ссылка на акт)",
+        "quantity": "20",
+        "unit": "-",
+        "unit_price": "12.50",
+        "total_price": "250.00"
+      }
+    ]
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 2,
+  "completeness": 1.0
+}

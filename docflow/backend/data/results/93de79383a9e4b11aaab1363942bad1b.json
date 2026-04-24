@@ -1,0 +1,43 @@
+{
+  "doc_id": "93de79383a9e4b11aaab1363942bad1b",
+  "filename": "д.400_ООО_Эверест_659289.pdf",
+  "file_size": 401621,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T12:00:49.562709",
+  "updated_at": "2026-04-24T12:01:06.406540",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "54",
+    "document_date": "05.10.2021",
+    "supplier_name": "ООО \"ЭВЕРЕСТ\"",
+    "supplier_inn": "1660360749",
+    "buyer_name": "МАДОУ \"Детский Сад №400\"",
+    "buyer_inn": "1661011758",
+    "total_amount": "6592.89",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Кружка без ручки 210мл. рис в асс.",
+        "quantity": "55.8",
+        "unit": "шт",
+        "unit_price": "5514.20",
+        "total_price": "6514.20"
+      },
+      {
+        "name": "Кружка 220 мл с ручкой белая",
+        "quantity": "1",
+        "unit": "шт",
+        "unit_price": "78.69",
+        "total_price": "78.69"
+      }
+    ]
+  },
+  "validation_errors": [
+    "vat_amount: не удалось распознать сумму НДС"
+  ],
+  "error_message": "",
+  "retry_count": 0,
+  "completeness": 0.95
+}

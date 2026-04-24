@@ -1,0 +1,76 @@
+{
+  "doc_id": "415a7f9b12da4a939f1f200aad087a3f",
+  "filename": "Дс365 А 22г.pdf",
+  "file_size": 2827355,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T11:53:30.133833",
+  "updated_at": "2026-04-24T11:54:04.118989",
+  "data": {
+    "document_type": "счёт",
+    "document_number": "1751",
+    "document_date": "11.10.2022",
+    "supplier_name": "Насыров Фидаиль Каюмович ИП",
+    "supplier_inn": "165900501507",
+    "buyer_name": "МУНИЦИПАЛЬНОЕ АВТОНОМНОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ \"ДЕТСКИЙ САД №365 КОМБИНИРОВАННОГО ВИДА\" АВИАСТРОИТЕЛЬНОГО РАЙОНА Г.КАЗАНИ",
+    "buyer_inn": "1661003725",
+    "total_amount": "39991.60",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Кастрюля 40л. нерж.",
+        "quantity": "1",
+        "unit": "шт",
+        "unit_price": "7826.00",
+        "total_price": "7828.90"
+      },
+      {
+        "name": "Кастрюля 30л. нерж.",
+        "quantity": "2",
+        "unit": "шт",
+        "unit_price": "6858.30",
+        "total_price": "11716.60"
+      },
+      {
+        "name": "Кастрюля нерж 11,5л Arian Gastro",
+        "quantity": "2",
+        "unit": "шт",
+        "unit_price": "2638.00",
+        "total_price": "5076.00"
+      },
+      {
+        "name": "Таз нерж 13.5л 40см",
+        "quantity": "2",
+        "unit": "шт",
+        "unit_price": "601.40",
+        "total_price": "1202.00"
+      },
+      {
+        "name": "Таз нерж 9.48л 36см",
+        "quantity": "3",
+        "unit": "шт",
+        "unit_price": "429.50",
+        "total_price": "1266.50"
+      },
+      {
+        "name": "Кастрюля Эконом 8л без ТР",
+        "quantity": "2",
+        "unit": "4шт",
+        "unit_price": "2679.90",
+        "total_price": "5359.80"
+      },
+      {
+        "name": "Кастрюля Б.п. без Т/С с прутковыми ручками \"Классика\"",
+        "quantity": "3",
+        "unit": "шт",
+        "unit_price": "2507.00",
+        "total_price": "7521.00"
+      }
+    ]
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 0,
+  "completeness": 0.9778
+}

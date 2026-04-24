@@ -1,0 +1,106 @@
+{
+  "doc_id": "b8d74e55c14c4f5ba708d127e4c5e908",
+  "filename": "шк.143_-1000000_сантехника.pdf",
+  "file_size": 896247,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T10:42:07.734441",
+  "updated_at": "2026-04-24T10:45:49.084487",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "251",
+    "document_date": "10.10.2025",
+    "supplier_name": "ООО \"ЭВЕРЕСТ\"",
+    "supplier_inn": "1660360749",
+    "buyer_name": "МБОУ \"ШКОЛА № 143\"",
+    "buyer_inn": "1657027522",
+    "total_amount": "100000.00",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "S2504-30F Смеситель для ванны с плоским длинным изливом с поворотным переключателем душа (40мм)",
+        "quantity": "1",
+        "unit": "шт",
+        "unit_price": "4800.00",
+        "total_price": "4800.00"
+      },
+      {
+        "name": "S4201 Смеситель для кухни с коротким изливом (крепление гайка) (40мм) (Хром)",
+        "quantity": "2",
+        "unit": "шт",
+        "unit_price": "2150.00",
+        "total_price": "4300.00"
+      },
+      {
+        "name": "BIANCO (385014s) Смеситель кухонный, нос 15 см, шаровый",
+        "quantity": "3",
+        "unit": "шт",
+        "unit_price": "1975.00",
+        "total_price": "5925.00"
+      },
+      {
+        "name": "SH-150 шланг для душа, нерастяжной 150 см",
+        "quantity": "5",
+        "unit": "шт",
+        "unit_price": "450.00",
+        "total_price": "2250.00"
+      },
+      {
+        "name": "SH 01 шланг для душа, не растяжной -150 см",
+        "quantity": "5",
+        "unit": "шт",
+        "unit_price": "330.00",
+        "total_price": "1650.00"
+      },
+      {
+        "name": "FABIA (9673) Смеситель для ванны с длинным плоским изливом, шаровый, с дивертором м/к на корпусе",
+        "quantity": "1",
+        "unit": "шт",
+        "unit_price": "4950.00",
+        "total_price": "4950.00"
+      },
+      {
+        "name": "Арматура для сливного бочка",
+        "quantity": "2",
+        "unit": "шт",
+        "unit_price": "1200.00",
+        "total_price": "2400.00"
+      },
+      {
+        "name": "Унитаз взрослый с бачком, пластик сидушка в комплекте",
+        "quantity": "3",
+        "unit": "шт",
+        "unit_price": "11000.00",
+        "total_price": "33000.00"
+      },
+      {
+        "name": "Писсуар Гала, с креплением",
+        "quantity": "2",
+        "unit": "шт",
+        "unit_price": "9049.60",
+        "total_price": "18099.20"
+      },
+      {
+        "name": "Сидушка для взрослого унитаза",
+        "quantity": "3",
+        "unit": "шт",
+        "unit_price": "3500.00",
+        "total_price": "10500.00"
+      },
+      {
+        "name": "Раковина Zentrum 60см",
+        "quantity": "2",
+        "unit": "шт",
+        "unit_price": "6062.90",
+        "total_price": "12125.80"
+      }
+    ]
+  },
+  "validation_errors": [
+    "vat_amount: не удалось распознать сумму НДС"
+  ],
+  "error_message": "",
+  "retry_count": 2,
+  "completeness": 0.9846
+}

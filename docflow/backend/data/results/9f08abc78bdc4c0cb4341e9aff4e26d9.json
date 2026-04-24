@@ -1,0 +1,26 @@
+{
+  "doc_id": "9f08abc78bdc4c0cb4341e9aff4e26d9",
+  "filename": "Детский сад №47 2021 год 9960,00.pdf",
+  "file_size": 167153,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T11:59:36.009774",
+  "updated_at": "2026-04-24T11:59:55.323782",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "4D010699.0002203501",
+    "document_date": "30.01.2021",
+    "supplier_name": "Муниципальное автономное дошкольное образовательное учреждение детский сад №47 г. Красноярска",
+    "supplier_inn": "2460083069",
+    "buyer_name": "",
+    "buyer_inn": "",
+    "total_amount": "9960.00",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": []
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 2,
+  "completeness": 0.7
+}

@@ -1,0 +1,34 @@
+{
+  "doc_id": "bdb09934ee4f431c858f71e35011898d",
+  "filename": "131_22200,00.pdf",
+  "file_size": 1455252,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T10:46:53.608145",
+  "updated_at": "2026-04-24T10:47:25.802790",
+  "data": {
+    "document_type": "накладная",
+    "document_number": "УТ-96",
+    "document_date": "01.04.2025",
+    "supplier_name": "ИП Игнатьева О.Ю.",
+    "supplier_inn": "165605009146",
+    "buyer_name": "МАДОУ \"Детский сад №131 комбинированного вида\" Приволжского района г.Казани",
+    "buyer_inn": "1659076780",
+    "total_amount": "22200.00",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Кресло САМБА (каркас никелир экотенс чёрн, дерево орех)",
+        "quantity": "3",
+        "unit": "шт",
+        "unit_price": "7403.00",
+        "total_price": "22200.00"
+      }
+    ]
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 1,
+  "completeness": 0.9333
+}

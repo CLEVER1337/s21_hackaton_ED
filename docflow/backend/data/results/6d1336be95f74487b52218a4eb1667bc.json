@@ -1,0 +1,111 @@
+{
+  "doc_id": "6d1336be95f74487b52218a4eb1667bc",
+  "filename": "135-45255-сф720 от 10.06.22-сантех, смесители.pdf",
+  "file_size": 2146871,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T11:58:04.860986",
+  "updated_at": "2026-04-24T11:58:44.922611",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "720",
+    "document_date": "10.06.2022",
+    "supplier_name": "ООО \"ХозАрсенал СК\"",
+    "supplier_inn": "1660353325",
+    "buyer_name": "МБДОУ \"Детский сад №135 комбинированного вида\" Советского района г. Казани",
+    "buyer_inn": "1660309855",
+    "total_amount": "45255.00",
+    "vat_amount": "7542.50",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Подводка воды 60 см г/г \"STM\"",
+        "quantity": "10",
+        "unit": "шт",
+        "unit_price": "93.00",
+        "total_price": "930.00"
+      },
+      {
+        "name": "Подводка воды 60 см г/ш \"STM\"",
+        "quantity": "10",
+        "unit": "шт",
+        "unit_price": "103.00",
+        "total_price": "1030.00"
+      },
+      {
+        "name": "Подводка воды 80 см г/ш \"STM\"",
+        "quantity": "10",
+        "unit": "шт",
+        "unit_price": "115.00",
+        "total_price": "1150.00"
+      },
+      {
+        "name": "Полводка воды 80 см г/г \"STM\"",
+        "quantity": "10",
+        "unit": "шт",
+        "unit_price": "109.00",
+        "total_price": "1090.00"
+      },
+      {
+        "name": "D40-25 Смеситель шаровый (40мм) для кухни, с вытяжным изливом",
+        "quantity": "5",
+        "unit": "шт",
+        "unit_price": "3517.00",
+        "total_price": "17585.00"
+      },
+      {
+        "name": "Q02-60U Смеситель полуоб. д/кухни, моно",
+        "quantity": "10",
+        "unit": "шт",
+        "unit_price": "1284.00",
+        "total_price": "12840.00"
+      },
+      {
+        "name": "LEDEM См-ль для кухни моно",
+        "quantity": "5",
+        "unit": "шт",
+        "unit_price": "607.00",
+        "total_price": "3035.00"
+      },
+      {
+        "name": "Сифон \"Орио\" с пер. 1 1/4*40 с г/тр. 40*40/50 А-3202",
+        "quantity": "10",
+        "unit": "шт",
+        "unit_price": "262.00",
+        "total_price": "2620.00"
+      },
+      {
+        "name": "Кран шаровый 1/2 г/г ручка \"STM\"",
+        "quantity": "5",
+        "unit": "шт",
+        "unit_price": "207.00",
+        "total_price": "1035.00"
+      },
+      {
+        "name": "Кран шаровый 1/2 г/ш ручка \"STM\"",
+        "quantity": "5",
+        "unit": "шт",
+        "unit_price": "216.00",
+        "total_price": "1080.00"
+      },
+      {
+        "name": "Кран шаровый 3/4 г/г ручка \"STM\"",
+        "quantity": "5",
+        "unit": "шт",
+        "unit_price": "277.00",
+        "total_price": "1385.00"
+      },
+      {
+        "name": "Кран шаровый 3/4 г/ш ручка \"STM\"",
+        "quantity": "5",
+        "unit": "шт",
+        "unit_price": "295.00",
+        "total_price": "1475.00"
+      }
+    ]
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 1,
+  "completeness": 1.0
+}

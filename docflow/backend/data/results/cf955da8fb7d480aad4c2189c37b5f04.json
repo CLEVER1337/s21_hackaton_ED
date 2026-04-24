@@ -1,0 +1,26 @@
+{
+  "doc_id": "cf955da8fb7d480aad4c2189c37b5f04",
+  "filename": "305-38747,80-тн2049 от 13.11.24-игрушки.pdf",
+  "file_size": 5799033,
+  "file_type": "pdf",
+  "status": "processing",
+  "created_at": "2026-04-24T11:02:48.667271",
+  "updated_at": "2026-04-24T11:05:04.295105",
+  "data": {
+    "document_type": "",
+    "document_number": "",
+    "document_date": "",
+    "supplier_name": "",
+    "supplier_inn": "",
+    "buyer_name": "",
+    "buyer_inn": "",
+    "total_amount": "",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": []
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 2,
+  "completeness": 0.0
+}

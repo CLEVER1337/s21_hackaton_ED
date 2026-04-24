@@ -1,0 +1,69 @@
+{
+  "doc_id": "eea7f5253a084f39944c23c099fe98e4",
+  "filename": "д.400_ООО_Галант_Плюс_1434141.pdf",
+  "file_size": 287887,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T12:00:49.562709",
+  "updated_at": "2026-04-24T12:01:10.075254",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "141",
+    "document_date": "05.10.2021",
+    "supplier_name": "ООО Галант Плюс",
+    "supplier_inn": "1658192656",
+    "buyer_name": "МАДОУ \"Детский Сад №400\"",
+    "buyer_inn": "1661011758",
+    "total_amount": "15339.17",
+    "vat_amount": "3175.83",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Пластилин 12 цветов, 180 гр с птеком",
+        "quantity": "53",
+        "unit": "шт",
+        "unit_price": "65.83",
+        "total_price": "3488.17"
+      },
+      {
+        "name": "Цветная бумага для поделок",
+        "quantity": "50",
+        "unit": "шт",
+        "unit_price": "21.67",
+        "total_price": "1083.33"
+      },
+      {
+        "name": "Цветной картон для поделок",
+        "quantity": "50",
+        "unit": "шт",
+        "unit_price": "37.50",
+        "total_price": "1875.00"
+      },
+      {
+        "name": "Краски акварельные 12 цветов",
+        "quantity": "50",
+        "unit": "шт",
+        "unit_price": "74.17",
+        "total_price": "3708.33"
+      },
+      {
+        "name": "Клей ПВА С,5кг",
+        "quantity": "6",
+        "unit": "шт",
+        "unit_price": "124.17",
+        "total_price": "745.00"
+      },
+      {
+        "name": "Клей карандаш SrP",
+        "quantity": "50",
+        "unit": "шт",
+        "unit_price": "20.83",
+        "total_price": "1041.67"
+      }
+    ]
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 0,
+  "completeness": 1.0
+}

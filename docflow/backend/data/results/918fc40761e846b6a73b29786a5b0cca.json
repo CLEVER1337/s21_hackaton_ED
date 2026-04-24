@@ -1,0 +1,26 @@
+{
+  "doc_id": "918fc40761e846b6a73b29786a5b0cca",
+  "filename": "Дс 407 А 24г.pdf",
+  "file_size": 141522,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T11:02:48.667271",
+  "updated_at": "2026-04-24T11:03:09.895766",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "",
+    "document_date": "",
+    "supplier_name": "",
+    "supplier_inn": "",
+    "buyer_name": "",
+    "buyer_inn": "",
+    "total_amount": "",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": []
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 0,
+  "completeness": 0.2
+}

@@ -1,0 +1,76 @@
+{
+  "doc_id": "46708bc1f21b46f3a25f50859e32fd9d",
+  "filename": "нак_1337523__простор.pdf",
+  "file_size": 566691,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T11:53:30.133833",
+  "updated_at": "2026-04-24T11:54:51.091837",
+  "data": {
+    "document_type": "счет-фактура",
+    "document_number": "178123/35",
+    "document_date": "22.06.2022",
+    "supplier_name": "ООО \"Агава\"",
+    "supplier_inn": "1660067356",
+    "buyer_name": "ЦДЮТК и Э \"Простор\"",
+    "buyer_inn": "1657025853",
+    "total_amount": "13375.23",
+    "vat_amount": "2229.21",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Краска моющаяся патексная Parade W100 матовая База С (9л)",
+        "quantity": "1",
+        "unit": "шт",
+        "unit_price": "2838.52",
+        "total_price": "2838.52"
+      },
+      {
+        "name": "Эмаль По-266 золотисто-коричневая (3кг)л-С",
+        "quantity": "10",
+        "unit": "шт",
+        "unit_price": "637.50",
+        "total_price": "6375.00"
+      },
+      {
+        "name": "Эмаль По-115 ЛАКРА глянцевая цвет красный (1кг)",
+        "quantity": "2",
+        "unit": "шт",
+        "unit_price": "295.84",
+        "total_price": "591.67"
+      },
+      {
+        "name": "Эмаль ПФ-115 ЛАКРА глянцевая цвет желтый (1кг)",
+        "quantity": "2",
+        "unit": "шт",
+        "unit_price": "304.17",
+        "total_price": "608.33"
+      },
+      {
+        "name": "Кисть плоская 35мм Basis светлая натуральная щетина Color Expert 81263512",
+        "quantity": "4",
+        "unit": "шт",
+        "unit_price": "46.67",
+        "total_price": "186.67"
+      },
+      {
+        "name": "Эмаль ПФ-115 Лакра белая матовая (1кг)л-С",
+        "quantity": "1",
+        "unit": "шт",
+        "unit_price": "258.33",
+        "total_price": "258.33"
+      },
+      {
+        "name": "Эмаль ПФ-115 ЛАКРА глянцевая цвет зеленый (1кг)",
+        "quantity": "1",
+        "unit": "шт",
+        "unit_price": "287.50",
+        "total_price": "287.50"
+      }
+    ]
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 2,
+  "completeness": 1.0
+}

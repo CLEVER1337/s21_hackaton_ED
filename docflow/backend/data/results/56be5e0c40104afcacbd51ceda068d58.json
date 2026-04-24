@@ -1,0 +1,36 @@
+{
+  "doc_id": "56be5e0c40104afcacbd51ceda068d58",
+  "filename": "сад 368 А_Счет фактура_2022г.pdf",
+  "file_size": 3639484,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T11:41:33.258252",
+  "updated_at": "2026-04-24T11:41:45.272734",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "770",
+    "document_date": "11.11.2022",
+    "supplier_name": "ООО \"Эс Ай Ти\"",
+    "supplier_inn": "1655187672",
+    "buyer_name": "МАДОУ \"ДЕТСКИЙ САД №368\"",
+    "buyer_inn": "1061004239",
+    "total_amount": "14362.31",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Театральная декорация",
+        "quantity": "1",
+        "unit": "шт",
+        "unit_price": "14362.31",
+        "total_price": "14362.31"
+      }
+    ]
+  },
+  "validation_errors": [
+    "vat_amount: не удалось распознать сумму НДС"
+  ],
+  "error_message": "",
+  "retry_count": 0,
+  "completeness": 0.9333
+}

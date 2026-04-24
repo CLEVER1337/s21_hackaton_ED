@@ -1,0 +1,43 @@
+{
+  "doc_id": "bf51e90232cc48aab9f28397f435cba4",
+  "filename": "ЦВР М(2021).pdf",
+  "file_size": 2832816,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T11:59:36.009774",
+  "updated_at": "2026-04-24T12:00:04.302450",
+  "data": {
+    "document_type": "накладная",
+    "document_number": "12",
+    "document_date": "22.06.2021",
+    "supplier_name": "ООО \"КБР\"",
+    "supplier_inn": "",
+    "buyer_name": "ИП Иванов Иван Иванович",
+    "buyer_inn": "106100721445",
+    "total_amount": "36403.00",
+    "vat_amount": "3600.00",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "мыго MON Тррннсе 200у 60%",
+        "quantity": "210",
+        "unit": "штук",
+        "unit_price": "2501.75",
+        "total_price": "330000.19"
+      },
+      {
+        "name": "Меир для MYsoos 120n1(10aryt)",
+        "quantity": "60",
+        "unit": "штук",
+        "unit_price": "8250.10",
+        "total_price": "82500.25"
+      }
+    ]
+  },
+  "validation_errors": [
+    "supplier_inn: неверный формат ИНН (ожидается 10 или 12 цифр)"
+  ],
+  "error_message": "",
+  "retry_count": 1,
+  "completeness": 0.95
+}
