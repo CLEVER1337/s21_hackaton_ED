@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export default function ValidationTooltip({ message, children }) {
   const [open, setOpen] = useState(false);
-  if (!message) return <>{children}</>;
+  const show = Boolean(message) && open;
 
   return (
     <div
@@ -13,10 +13,10 @@ export default function ValidationTooltip({ message, children }) {
       onBlur={() => setOpen(false)}
     >
       {children}
-      {open && (
-        <div className="absolute left-0 -top-2 -translate-y-full z-10 px-2.5 py-1.5 rounded-md bg-kzn-red text-white text-xs shadow-lg max-w-xs whitespace-pre-wrap">
+      {show && (
+        <div className="absolute left-0 -top-2 -translate-y-full z-10 px-2.5 py-1.5 rounded-md bg-brand-error text-white text-xs shadow-lg max-w-xs whitespace-pre-wrap pointer-events-none">
           {message}
-          <span className="absolute left-4 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-kzn-red" />
+          <span className="absolute left-4 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-brand-error" />
         </div>
       )}
     </div>

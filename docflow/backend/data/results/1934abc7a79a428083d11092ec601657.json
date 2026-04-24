@@ -1,0 +1,26 @@
+{
+  "doc_id": "1934abc7a79a428083d11092ec601657",
+  "filename": "131_10300,00.pdf",
+  "file_size": 1760510,
+  "file_type": "pdf",
+  "status": "error",
+  "created_at": "2026-04-24T10:02:31.302259",
+  "updated_at": "2026-04-24T10:05:31.558960",
+  "data": {
+    "document_type": "",
+    "document_number": "",
+    "document_date": "",
+    "supplier_name": "",
+    "supplier_inn": "",
+    "buyer_name": "",
+    "buyer_inn": "",
+    "total_amount": "",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": []
+  },
+  "validation_errors": [],
+  "error_message": "Не удалось обработать документ после 4 попыток. Последняя ошибка: Сбой GigaChat API: The read operation timed out",
+  "retry_count": 4,
+  "completeness": 0.0
+}

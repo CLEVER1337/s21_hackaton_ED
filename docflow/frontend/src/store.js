@@ -4,6 +4,7 @@ import {
   deleteDocument as apiDelete,
   getDocument,
   getDocuments,
+  retryDocument as apiRetry,
   updateDocument as apiUpdate,
 } from './api.js';
 
@@ -128,6 +129,23 @@ export const useStore = create((set, get) => ({
     set((state) => ({
       documents: state.documents.filter((d) => d.doc_id !== docId),
     }));
+  },
+
+  retryDocument: async (docId) => {
+    const { data } = await apiRetry(docId);
+    // Put the record into processing state locally and start polling
+    set((state) => ({
+      documents: state.documents.map((d) =>
+        d.doc_id === docId ? { ...d, status: 'processing', error_message: '' } : d,
+      ),
+      currentDoc:
+        state.currentDoc?.doc_id === docId
+          ? { ...state.currentDoc, status: 'processing', error_message: '' }
+          : state.currentDoc,
+      processingIds: new Set([...state.processingIds, docId]),
+    }));
+    get().startPolling();
+    return data;
   },
 
   startPolling: () => {

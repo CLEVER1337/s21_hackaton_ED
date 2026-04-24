@@ -46,6 +46,8 @@ export const updateDocument = (id, data) =>
 export const approveDocument = (id) =>
   api.post(`/api/documents/${id}/approve`);
 export const deleteDocument = (id) => api.delete(`/api/documents/${id}`);
+export const retryDocument = (id) => api.post(`/api/documents/${id}/retry`);
+export const getStats = () => api.get('/api/stats');
 export const exportDocument = (id, format) =>
   api.get(`/api/documents/${id}/export`, {
     params: { format },

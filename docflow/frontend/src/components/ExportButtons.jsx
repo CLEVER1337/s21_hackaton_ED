@@ -51,8 +51,8 @@ export default function ExportButtons({ docId, disabled }) {
             onClick={() => handle(f.key)}
             className={`px-4 py-2 rounded-md border text-sm font-medium transition ${
               disabled
-                ? 'border-kzn-line text-kzn-muted bg-kzn-cream cursor-not-allowed'
-                : 'border-kzn-green text-kzn-green hover:bg-kzn-green hover:text-white'
+                ? 'border-brand-line text-brand-muted bg-brand-light cursor-not-allowed'
+                : 'border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white'
             }`}
           >
             {pending === f.key ? (
@@ -66,11 +66,11 @@ export default function ExportButtons({ docId, disabled }) {
         ))}
       </div>
       {disabled && (
-        <div className="text-xs text-kzn-muted mt-2">
+        <div className="text-xs text-brand-muted mt-2">
           Экспорт доступен только для утверждённых документов
         </div>
       )}
-      {error && <div className="text-xs text-kzn-red mt-2">{error}</div>}
+      {error && <div className="text-xs text-brand-error mt-2">{error}</div>}
     </div>
   );
 }

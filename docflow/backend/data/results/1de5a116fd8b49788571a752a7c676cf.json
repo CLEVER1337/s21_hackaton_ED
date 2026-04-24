@@ -1,0 +1,78 @@
+{
+  "doc_id": "1de5a116fd8b49788571a752a7c676cf",
+  "filename": "31200,00-тн №29 от 26.02.2026-моющие.pdf",
+  "file_size": 468821,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T10:02:31.302259",
+  "updated_at": "2026-04-24T10:04:16.930408",
+  "data": {
+    "document_type": "накладная",
+    "document_number": "29",
+    "document_date": "26.02.2026",
+    "supplier_name": "Индивидуальный предприниматель Прокопьева Екатерина Сергеевна",
+    "supplier_inn": "165708575909",
+    "buyer_name": "МБДОУ \"Детский Сад №73\"",
+    "buyer_inn": "1659175283",
+    "total_amount": "31200.00",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Бумага туалетная",
+        "quantity": "144",
+        "unit": "шт",
+        "unit_price": "31.00",
+        "total_price": "4464.00"
+      },
+      {
+        "name": "МИФ 9кг автомат",
+        "quantity": "2",
+        "unit": "шт",
+        "unit_price": "2408.75",
+        "total_price": "4817.50"
+      },
+      {
+        "name": "Перчатки хозяйственные",
+        "quantity": "100",
+        "unit": "шт",
+        "unit_price": "89.00",
+        "total_price": "8900.00"
+      },
+      {
+        "name": "Мешки д/мусора 30л",
+        "quantity": "50",
+        "unit": "шт",
+        "unit_price": "82.00",
+        "total_price": "4100.00"
+      },
+      {
+        "name": "Мешки 60л",
+        "quantity": "50",
+        "unit": "шт",
+        "unit_price": "114.00",
+        "total_price": "5700.00"
+      },
+      {
+        "name": "мешки 120л",
+        "quantity": "10",
+        "unit": "шт",
+        "unit_price": "170.00",
+        "total_price": "1700.00"
+      },
+      {
+        "name": "Порошок МИФ 6кг Автомат",
+        "quantity": "1",
+        "unit": "шт",
+        "unit_price": "1518.50",
+        "total_price": "1518.50"
+      }
+    ]
+  },
+  "validation_errors": [
+    "vat_amount: не удалось распознать сумму НДС"
+  ],
+  "error_message": "",
+  "retry_count": 2,
+  "completeness": 0.9778
+}

@@ -31,7 +31,9 @@ CREATE TABLE IF NOT EXISTS documents (
     updated_at TEXT NOT NULL,
     data TEXT,
     validation_errors TEXT NOT NULL DEFAULT '[]',
-    error_message TEXT NOT NULL DEFAULT ''
+    error_message TEXT NOT NULL DEFAULT '',
+    retry_count INTEGER NOT NULL DEFAULT 0,
+    completeness REAL NOT NULL DEFAULT 0
 );
 """
 
@@ -39,6 +41,17 @@ CREATE TABLE IF NOT EXISTS documents (
 async def init_db() -> None:
     async with aiosqlite.connect(DB_PATH) as db:
         await db.executescript(_SCHEMA)
+        # backfill schema for existing DBs
+        cursor = await db.execute("PRAGMA table_info(documents)")
+        cols = {row[1] for row in await cursor.fetchall()}
+        if "retry_count" not in cols:
+            await db.execute(
+                "ALTER TABLE documents ADD COLUMN retry_count INTEGER NOT NULL DEFAULT 0"
+            )
+        if "completeness" not in cols:
+            await db.execute(
+                "ALTER TABLE documents ADD COLUMN completeness REAL NOT NULL DEFAULT 0"
+            )
         await db.commit()
 
 
@@ -55,6 +68,9 @@ def _row_to_record(row: aiosqlite.Row) -> DocumentRecord:
         errors = json.loads(errors_raw)
     except Exception:
         errors = []
+    keys = row.keys() if hasattr(row, "keys") else []
+    retry_count = row["retry_count"] if "retry_count" in keys else 0
+    completeness = row["completeness"] if "completeness" in keys else 0.0
     return DocumentRecord(
         doc_id=row["doc_id"],
         filename=row["filename"],
@@ -66,6 +82,8 @@ def _row_to_record(row: aiosqlite.Row) -> DocumentRecord:
         data=data_obj,
         validation_errors=errors,
         error_message=row["error_message"] or "",
+        retry_count=int(retry_count or 0),
+        completeness=float(completeness or 0),
     )
 
 
@@ -74,8 +92,8 @@ async def create_document(record: DocumentRecord) -> None:
         await db.execute(
             """INSERT INTO documents
                (doc_id, filename, file_size, file_type, status, created_at, updated_at,
-                data, validation_errors, error_message)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                data, validation_errors, error_message, retry_count, completeness)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             (
                 record.doc_id,
                 record.filename,
@@ -87,6 +105,8 @@ async def create_document(record: DocumentRecord) -> None:
                 json.dumps(record.data.model_dump(), ensure_ascii=False) if record.data else None,
                 json.dumps(record.validation_errors, ensure_ascii=False),
                 record.error_message or "",
+                int(record.retry_count or 0),
+                float(record.completeness or 0),
             ),
         )
         await db.commit()
@@ -120,6 +140,8 @@ async def update_document(
     data: Optional[DocumentData] = None,
     validation_errors: Optional[list[str]] = None,
     error_message: Optional[str] = None,
+    retry_count: Optional[int] = None,
+    completeness: Optional[float] = None,
 ) -> Optional[DocumentRecord]:
     current = await get_document(doc_id)
     if not current:
@@ -133,19 +155,26 @@ async def update_document(
         current.validation_errors = validation_errors
     if error_message is not None:
         current.error_message = error_message
+    if retry_count is not None:
+        current.retry_count = retry_count
+    if completeness is not None:
+        current.completeness = completeness
     current.updated_at = datetime.utcnow()
 
     async with aiosqlite.connect(DB_PATH) as db:
         await db.execute(
             """UPDATE documents
                SET status = ?, data = ?, validation_errors = ?,
-                   error_message = ?, updated_at = ?
+                   error_message = ?, retry_count = ?, completeness = ?,
+                   updated_at = ?
                WHERE doc_id = ?""",
             (
                 current.status,
                 json.dumps(current.data.model_dump(), ensure_ascii=False) if current.data else None,
                 json.dumps(current.validation_errors, ensure_ascii=False),
                 current.error_message or "",
+                int(current.retry_count or 0),
+                float(current.completeness or 0),
                 current.updated_at.isoformat(),
                 doc_id,
             ),

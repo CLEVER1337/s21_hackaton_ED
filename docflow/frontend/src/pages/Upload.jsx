@@ -1,9 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FileDropZone from '../components/FileDropZone.jsx';
 import StatusBadge from '../components/StatusBadge.jsx';
+import ErrorDetails from '../components/ErrorDetails.jsx';
+import DocumentFilters from '../components/DocumentFilters.jsx';
+import CompletenessBar from '../components/CompletenessBar.jsx';
 import { uploadFiles } from '../api.js';
 import { useStore } from '../store.js';
+import { confirmDialog, notify } from '../components/Toast.jsx';
+import { applyFilters, EMPTY_FILTERS } from '../utils/filters.js';
 
 function formatSize(bytes) {
   if (!bytes) return '0 B';
@@ -22,13 +27,13 @@ export default function Upload() {
     documents,
     fetchDocuments,
     isLoading,
-    error,
-    setError,
     removeDocument,
+    retryDocument,
     stopPolling,
   } = useStore();
   const [progress, setProgress] = useState({});
-  const [uploadError, setUploadError] = useState('');
+  const [filters, setFilters] = useState(EMPTY_FILTERS);
+  const [retryBusy, setRetryBusy] = useState({});
 
   useEffect(() => {
     fetchDocuments();
@@ -36,7 +41,6 @@ export default function Upload() {
   }, [fetchDocuments, stopPolling]);
 
   const handleFiles = async (files) => {
-    setUploadError('');
     const label = files.map((f) => f.name).join(',');
     setProgress((p) => ({ ...p, [label]: 0 }));
     try {
@@ -48,10 +52,14 @@ export default function Upload() {
         delete n[label];
         return n;
       });
+      notify.success(`Загружено файлов: ${files.length}`);
       await fetchDocuments();
     } catch (err) {
-      const msg = err.response?.data?.detail || err.response?.data?.error || 'Ошибка загрузки';
-      setUploadError(typeof msg === 'string' ? msg : JSON.stringify(msg));
+      const msg =
+        err.response?.data?.detail ||
+        err.response?.data?.error ||
+        'Ошибка загрузки';
+      notify.error(typeof msg === 'string' ? msg : JSON.stringify(msg));
       setProgress((p) => {
         const n = { ...p };
         delete n[label];
@@ -60,42 +68,65 @@ export default function Upload() {
     }
   };
 
+  const handleDelete = async (doc) => {
+    const ok = await confirmDialog({
+      title: 'Удалить документ?',
+      message: `«${doc.filename}» будет удалён безвозвратно.`,
+      confirmText: 'Удалить',
+      tone: 'danger',
+    });
+    if (!ok) return;
+    try {
+      await removeDocument(doc.doc_id);
+      notify.success('Документ удалён');
+    } catch (err) {
+      notify.error(err.response?.data?.error || 'Не удалось удалить документ');
+    }
+  };
+
+  const handleRetry = async (doc) => {
+    setRetryBusy((m) => ({ ...m, [doc.doc_id]: true }));
+    try {
+      await retryDocument(doc.doc_id);
+      notify.info('Повторная обработка запущена');
+    } catch (err) {
+      notify.error(err.response?.data?.error || 'Не удалось запустить повтор');
+    } finally {
+      setRetryBusy((m) => {
+        const n = { ...m };
+        delete n[doc.doc_id];
+        return n;
+      });
+    }
+  };
+
+  const filtered = useMemo(
+    () => applyFilters(documents, filters),
+    [documents, filters],
+  );
+
   return (
     <div className="max-w-6xl mx-auto px-6 py-8 space-y-6">
       <section>
         <h1 className="text-2xl font-semibold mb-1">Загрузка документов</h1>
-        <p className="text-sm text-kzn-muted">
-          Поддерживаются счёта-фактуры, накладные, акты и счета в форматах PDF, JPG, PNG.
+        <p className="text-sm text-brand-muted">
+          Поддерживаются счёта-фактуры, накладные, акты и счета в форматах PDF, DOC, DOCX, JPG, PNG.
         </p>
       </section>
 
       <FileDropZone onFiles={handleFiles} />
 
-      {uploadError && (
-        <div className="rounded-md border border-red-200 bg-red-50 text-red-800 text-sm p-3">
-          {uploadError}
-        </div>
-      )}
-      {error && (
-        <div className="rounded-md border border-red-200 bg-red-50 text-red-800 text-sm p-3 flex justify-between">
-          <span>{error}</span>
-          <button onClick={() => setError('')} className="underline">
-            закрыть
-          </button>
-        </div>
-      )}
-
       {Object.entries(progress).length > 0 && (
-        <div className="bg-white border border-kzn-line rounded-md p-3 space-y-2">
+        <div className="bg-white border border-brand-line rounded-md p-3 space-y-2">
           {Object.entries(progress).map(([label, pct]) => (
             <div key={label}>
-              <div className="flex justify-between text-xs text-kzn-muted">
+              <div className="flex justify-between text-xs text-brand-muted">
                 <span className="truncate max-w-[70%]">{label}</span>
                 <span>{pct}%</span>
               </div>
-              <div className="h-1.5 w-full bg-kzn-cream rounded overflow-hidden">
+              <div className="h-1.5 w-full bg-brand-light rounded overflow-hidden">
                 <div
-                  className="h-full bg-kzn-green transition-all"
+                  className="h-full bg-brand-blue transition-all"
                   style={{ width: `${pct}%` }}
                 />
               </div>
@@ -104,25 +135,36 @@ export default function Upload() {
         </div>
       )}
 
-      <section className="bg-white border border-kzn-line rounded-lg shadow-card">
-        <header className="px-4 py-3 border-b border-kzn-line flex items-center justify-between">
-          <h2 className="font-semibold">Документы</h2>
+      <section className="bg-white border border-brand-line rounded-lg shadow-card">
+        <header className="px-4 py-3 border-b border-brand-line flex items-center justify-between flex-wrap gap-2">
+          <div className="flex items-center gap-3">
+            <h2 className="font-semibold">Документы</h2>
+            <span className="text-xs text-brand-muted">
+              {filtered.length} / {documents.length}
+            </span>
+          </div>
           <button
             onClick={fetchDocuments}
-            className="text-xs text-kzn-green hover:underline"
+            className="text-xs text-brand-blue hover:underline"
             disabled={isLoading}
           >
             Обновить
           </button>
         </header>
+
+        <div className="px-4 py-3 border-b border-brand-line">
+          <DocumentFilters value={filters} onChange={setFilters} />
+        </div>
+
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-xs uppercase text-kzn-muted bg-kzn-cream/50">
+              <tr className="text-left text-xs uppercase text-brand-muted bg-brand-light/50">
                 <th className="px-4 py-2">Имя файла</th>
                 <th className="px-4 py-2 w-24">Тип</th>
                 <th className="px-4 py-2 w-28">Размер</th>
-                <th className="px-4 py-2 w-48">Статус</th>
+                <th className="px-4 py-2 w-40">Качество AI</th>
+                <th className="px-4 py-2 w-52">Статус</th>
                 <th className="px-4 py-2 w-64">Действия</th>
               </tr>
             </thead>
@@ -130,9 +172,9 @@ export default function Upload() {
               {isLoading && documents.length === 0 && (
                 <>
                   {[0, 1, 2].map((i) => (
-                    <tr key={i} className="border-t border-kzn-line">
-                      <td colSpan={5} className="px-4 py-3">
-                        <div className="h-4 rounded animate-pulse bg-kzn-cream" />
+                    <tr key={i} className="border-t border-brand-line">
+                      <td colSpan={6} className="px-4 py-3">
+                        <div className="h-4 rounded animate-pulse bg-brand-light" />
                       </td>
                     </tr>
                   ))}
@@ -140,36 +182,58 @@ export default function Upload() {
               )}
               {!isLoading && documents.length === 0 && (
                 <tr>
-                  <td colSpan={5} className="px-4 py-10 text-center text-kzn-muted">
+                  <td colSpan={6} className="px-4 py-10 text-center text-brand-muted">
                     Пока нет документов. Загрузите первый файл.
                   </td>
                 </tr>
               )}
-              {documents.map((doc) => (
-                <tr key={doc.doc_id} className="border-t border-kzn-line hover:bg-kzn-cream/40">
+              {!isLoading && documents.length > 0 && filtered.length === 0 && (
+                <tr>
+                  <td colSpan={6} className="px-4 py-10 text-center text-brand-muted">
+                    По текущим фильтрам документов не найдено.
+                  </td>
+                </tr>
+              )}
+              {filtered.map((doc) => (
+                <tr
+                  key={doc.doc_id}
+                  className="border-t border-brand-line hover:bg-brand-light/40 align-top"
+                >
                   <td className="px-4 py-2 truncate max-w-[320px]" title={doc.filename}>
                     {doc.filename}
+                    {doc.data?.document_number && (
+                      <div className="text-[11px] text-brand-muted">
+                        № {doc.data.document_number}
+                        {doc.data.document_date ? ` · ${doc.data.document_date}` : ''}
+                      </div>
+                    )}
                   </td>
-                  <td className="px-4 py-2 uppercase text-xs text-kzn-muted">
+                  <td className="px-4 py-2 uppercase text-xs text-brand-muted">
                     {doc.file_type}
                   </td>
                   <td className="px-4 py-2 text-xs">{formatSize(doc.file_size)}</td>
                   <td className="px-4 py-2">
+                    <CompletenessBar value={doc.completeness} status={doc.status} />
+                  </td>
+                  <td className="px-4 py-2">
                     <StatusBadge status={doc.status} />
-                    {doc.status === 'error' && doc.error_message && (
-                      <div className="text-[11px] text-kzn-red mt-1">
-                        {doc.error_message}
-                      </div>
+                    {doc.status === 'error' && (
+                      <ErrorDetails
+                        message={doc.error_message}
+                        retryCount={doc.retry_count}
+                        onRetry={() => handleRetry(doc)}
+                        retryBusy={!!retryBusy[doc.doc_id]}
+                      />
                     )}
                   </td>
                   <td className="px-4 py-2">
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-2">
                       <Link
                         to={`/verify/${doc.doc_id}`}
                         className={`px-3 py-1.5 rounded-md text-xs font-medium ${
                           doc.status === 'ready' || doc.status === 'approved'
-                            ? 'bg-kzn-green text-white hover:bg-kzn-green-dark'
-                            : 'bg-kzn-cream text-kzn-muted pointer-events-none'
+                            ? 'bg-brand-blue text-white hover:bg-brand-navy'
+                            : 'bg-brand-light text-brand-muted pointer-events-none'
                         }`}
                       >
                         Открыть
@@ -177,18 +241,14 @@ export default function Upload() {
                       {doc.status === 'approved' && (
                         <Link
                           to={`/results/${doc.doc_id}`}
-                          className="px-3 py-1.5 rounded-md text-xs font-medium border border-kzn-green text-kzn-green hover:bg-kzn-green/10"
+                          className="px-3 py-1.5 rounded-md text-xs font-medium border border-brand-blue text-brand-blue hover:bg-brand-blue/10"
                         >
                           Экспорт
                         </Link>
                       )}
                       <button
-                        onClick={async () => {
-                          if (confirm(`Удалить документ «${doc.filename}»?`)) {
-                            await removeDocument(doc.doc_id);
-                          }
-                        }}
-                        className="px-3 py-1.5 rounded-md text-xs text-kzn-red hover:bg-red-50"
+                        onClick={() => handleDelete(doc)}
+                        className="px-3 py-1.5 rounded-md text-xs text-brand-error hover:bg-red-50"
                       >
                         Удалить
                       </button>

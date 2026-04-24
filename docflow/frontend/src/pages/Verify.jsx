@@ -3,8 +3,11 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import DocumentViewer from '../components/DocumentViewer.jsx';
 import StatusBadge from '../components/StatusBadge.jsx';
 import VerifyForm from '../components/VerifyForm.jsx';
+import ErrorDetails from '../components/ErrorDetails.jsx';
+import CompletenessBar from '../components/CompletenessBar.jsx';
 import { getFileUrl } from '../api.js';
 import { useStore } from '../store.js';
+import { confirmDialog, notify } from '../components/Toast.jsx';
 
 const EMPTY_ITEM = {
   name: '',
@@ -48,10 +51,12 @@ export default function Verify() {
     loadDraftFromStorage,
     saveDocument,
     approveDocument,
+    retryDocument,
   } = useStore();
 
   const [saving, setSaving] = useState(false);
   const [approving, setApproving] = useState(false);
+  const [retrying, setRetrying] = useState(false);
   const [saveStatus, setSaveStatus] = useState('');
 
   useEffect(() => {
@@ -69,7 +74,7 @@ export default function Verify() {
 
   if (!currentDoc) {
     return (
-      <div className="max-w-6xl mx-auto px-6 py-10 text-kzn-muted">
+      <div className="max-w-6xl mx-auto px-6 py-10 text-brand-muted">
         Загрузка документа…
       </div>
     );
@@ -78,15 +83,58 @@ export default function Verify() {
   if (currentDoc.status === 'processing') {
     return (
       <div className="max-w-6xl mx-auto px-6 py-10">
-        <div className="rounded-lg bg-white border border-kzn-line p-6 text-center">
-          <span className="spinner text-kzn-green" />
+        <div className="rounded-lg bg-white border border-brand-line p-6 text-center">
+          <span className="spinner text-brand-blue" />
           <div className="mt-3 font-medium">Документ ещё обрабатывается</div>
-          <div className="text-sm text-kzn-muted">
-            Обновите страницу чуть позже.
+          <div className="text-sm text-brand-muted">
+            Обновите страницу чуть позже — страница сама подтянет результат.
           </div>
           <Link
             to="/"
-            className="inline-block mt-4 text-sm text-kzn-green hover:underline"
+            className="inline-block mt-4 text-sm text-brand-blue hover:underline"
+          >
+            ← Вернуться к списку
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  if (currentDoc.status === 'error') {
+    return (
+      <div className="max-w-3xl mx-auto px-6 py-10">
+        <div className="rounded-lg bg-white border border-brand-line p-6 space-y-3">
+          <div className="flex items-center gap-2">
+            <StatusBadge status="error" />
+            <span className="text-sm text-brand-muted truncate">
+              {currentDoc.filename}
+            </span>
+          </div>
+          <div className="text-base font-medium">
+            Не удалось обработать документ.
+          </div>
+          <ErrorDetails
+            message={currentDoc.error_message}
+            retryCount={currentDoc.retry_count}
+            onRetry={async () => {
+              setRetrying(true);
+              try {
+                await retryDocument(id);
+                notify.info('Повторная обработка запущена');
+                await fetchDocument(id);
+              } catch (err) {
+                notify.error(
+                  err.response?.data?.error || 'Не удалось запустить повтор',
+                );
+              } finally {
+                setRetrying(false);
+              }
+            }}
+            retryBusy={retrying}
+          />
+          <Link
+            to="/"
+            className="inline-block mt-4 text-sm text-brand-blue hover:underline"
           >
             ← Вернуться к списку
           </Link>
@@ -122,18 +170,28 @@ export default function Verify() {
     try {
       await saveDocument(id, formData);
       setSaveStatus('Сохранено');
+      notify.success('Правки сохранены');
       setTimeout(() => setSaveStatus(''), 2000);
     } catch (err) {
-      setSaveStatus(err.response?.data?.error || 'Ошибка сохранения');
+      const msg = err.response?.data?.error || 'Ошибка сохранения';
+      setSaveStatus(msg);
+      notify.error(msg);
     } finally {
       setSaving(false);
     }
   };
 
   const handleReset = async () => {
-    if (!confirm('Сбросить все ваши правки и вернуться к данным AI?')) return;
+    const ok = await confirmDialog({
+      title: 'Сбросить ваши правки?',
+      message: 'Вернуться к данным, полученным от нейросети.',
+      confirmText: 'Сбросить',
+      tone: 'danger',
+    });
+    if (!ok) return;
     clearDraft(id);
     await fetchDocument(id);
+    notify.info('Правки сброшены');
   };
 
   const handleApprove = async () => {
@@ -142,9 +200,12 @@ export default function Verify() {
       await saveDocument(id, formData);
       await approveDocument(id);
       clearDraft(id);
+      notify.success('Документ утверждён');
       navigate(`/results/${id}`);
     } catch (err) {
-      setSaveStatus(err.response?.data?.error || 'Ошибка утверждения');
+      const msg = err.response?.data?.error || 'Ошибка утверждения';
+      setSaveStatus(msg);
+      notify.error(msg);
     } finally {
       setApproving(false);
     }
@@ -154,16 +215,25 @@ export default function Verify() {
 
   return (
     <div className="max-w-[1400px] mx-auto px-4 py-6">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
-          <Link to="/" className="text-sm text-kzn-green hover:underline">
+      <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+        <div className="flex items-center gap-3 flex-wrap">
+          <Link to="/" className="text-sm text-brand-blue hover:underline">
             ← К списку
           </Link>
           <StatusBadge status={currentDoc.status} />
-          <span className="text-sm text-kzn-muted">{currentDoc.filename}</span>
+          <span className="text-sm text-brand-muted truncate max-w-sm">
+            {currentDoc.filename}
+          </span>
+          <div className="flex items-center gap-2 min-w-[160px]">
+            <span className="text-xs text-brand-muted">Качество AI:</span>
+            <CompletenessBar
+              value={currentDoc.completeness}
+              status={currentDoc.status}
+            />
+          </div>
         </div>
         {saveStatus && (
-          <span className="text-xs text-kzn-muted">{saveStatus}</span>
+          <span className="text-xs text-brand-muted">{saveStatus}</span>
         )}
       </div>
 
@@ -202,25 +272,25 @@ export default function Verify() {
             onRemoveItem={handleRemoveItem}
           />
 
-          <div className="sticky bottom-2 flex flex-wrap gap-2 bg-white border border-kzn-line rounded-lg p-3 shadow-card">
+          <div className="sticky bottom-2 flex flex-wrap gap-2 bg-white border border-brand-line rounded-lg p-3 shadow-card">
             <button
               onClick={handleSave}
               disabled={saving || approving}
-              className="px-4 py-2 rounded-md bg-kzn-cream text-kzn-ink border border-kzn-line hover:bg-kzn-sand text-sm"
+              className="px-4 py-2 rounded-md bg-brand-light text-brand-ink border border-brand-line hover:bg-brand-light text-sm"
             >
               {saving ? 'Сохранение…' : 'Сохранить'}
             </button>
             <button
               onClick={handleReset}
               disabled={saving || approving}
-              className="px-4 py-2 rounded-md border border-kzn-line text-kzn-muted hover:text-kzn-red hover:border-kzn-red text-sm"
+              className="px-4 py-2 rounded-md border border-brand-line text-brand-muted hover:text-brand-error hover:border-brand-error text-sm"
             >
               Сбросить к AI-результату
             </button>
             <button
               onClick={handleApprove}
               disabled={saving || approving}
-              className="ml-auto px-5 py-2 rounded-md bg-kzn-green text-white font-medium hover:bg-kzn-green-dark disabled:opacity-60 text-sm inline-flex items-center gap-2"
+              className="ml-auto px-5 py-2 rounded-md bg-brand-blue text-white font-medium hover:bg-brand-navy disabled:opacity-60 text-sm inline-flex items-center gap-2"
             >
               {approving && <span className="spinner" />}
               {approving ? 'Утверждение…' : 'Утвердить и перейти к экспорту'}

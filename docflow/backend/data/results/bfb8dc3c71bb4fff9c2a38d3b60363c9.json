@@ -1,0 +1,48 @@
+{
+  "doc_id": "bfb8dc3c71bb4fff9c2a38d3b60363c9",
+  "filename": "167дс-19586 (2025).pdf",
+  "file_size": 363426,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T10:02:31.302259",
+  "updated_at": "2026-04-24T10:03:32.021318",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "Ф000002030",
+    "document_date": "16.10.2025",
+    "supplier_name": "Индивидуальный предприниматель Фаткуллин Зуфар Сагитович",
+    "supplier_inn": "165700080654",
+    "buyer_name": "МАДОУ \"Детский сад №167 комбинированного вида с татарским языком воспитания и обучения\" Советского района г.Казани",
+    "buyer_inn": "1680033810",
+    "total_amount": "19586.00",
+    "vat_amount": "3264.34",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Кастрюля нерж ОБЩЕПИТ 20.0п «35см",
+        "quantity": "1",
+        "unit": "шт",
+        "unit_price": "4433.33",
+        "total_price": "4433.33"
+      },
+      {
+        "name": "КТ 06-22 Котёл 30,GМ (340cM5F2GoM) ОБЩЕПИТ",
+        "quantity": "1",
+        "unit": "шт",
+        "unit_price": "698.33",
+        "total_price": "698.33"
+      },
+      {
+        "name": "ТРС-3 КТ-ОБ 30 К Кастрюля 10.0г мит кр. ТРС.3 (0) АШ",
+        "quantity": "1",
+        "unit": "шт",
+        "unit_price": "4900.00",
+        "total_price": "4900.00"
+      }
+    ]
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 3,
+  "completeness": 1.0
+}
