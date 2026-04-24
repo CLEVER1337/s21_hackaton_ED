@@ -9,16 +9,16 @@ export default function DocumentViewer({ fileUrl, fileType, filename, fileSize }
     : '';
 
   return (
-    <div className="h-full flex flex-col bg-kzn-sand/30 border border-kzn-line rounded-lg overflow-hidden">
-      <div className="flex items-center gap-2 px-3 py-2 bg-white border-b border-kzn-line text-sm">
+    <div className="h-full flex flex-col bg-brand-light/30 border border-brand-line rounded-lg overflow-hidden">
+      <div className="flex items-center gap-2 px-3 py-2 bg-white border-b border-brand-line text-sm">
         <div className="truncate flex-1" title={filename}>
           <span className="font-medium">{filename}</span>
-          {sizeLabel && <span className="text-kzn-muted ml-2">{sizeLabel}</span>}
+          {sizeLabel && <span className="text-brand-muted ml-2">{sizeLabel}</span>}
         </div>
         <div className="flex items-center gap-1">
           <button
             onClick={() => setScale((s) => Math.max(0.5, +(s - 0.1).toFixed(2)))}
-            className="px-2 py-1 rounded border border-kzn-line hover:bg-kzn-cream text-xs"
+            className="px-2 py-1 rounded border border-brand-line hover:bg-brand-light text-xs"
             title="Уменьшить"
           >
             −
@@ -26,14 +26,14 @@ export default function DocumentViewer({ fileUrl, fileType, filename, fileSize }
           <span className="text-xs w-10 text-center">{Math.round(scale * 100)}%</span>
           <button
             onClick={() => setScale((s) => Math.min(2.5, +(s + 0.1).toFixed(2)))}
-            className="px-2 py-1 rounded border border-kzn-line hover:bg-kzn-cream text-xs"
+            className="px-2 py-1 rounded border border-brand-line hover:bg-brand-light text-xs"
             title="Увеличить"
           >
             +
           </button>
           <button
             onClick={() => setScale(1)}
-            className="px-2 py-1 rounded border border-kzn-line hover:bg-kzn-cream text-xs"
+            className="px-2 py-1 rounded border border-brand-line hover:bg-brand-light text-xs"
             title="Сбросить"
           >
             1:1
@@ -53,13 +53,13 @@ export default function DocumentViewer({ fileUrl, fileType, filename, fileSize }
             <iframe
               src={fileUrl}
               title={filename}
-              className="w-full h-[75vh] bg-white border border-kzn-line rounded"
+              className="w-full h-[75vh] bg-white border border-brand-line rounded"
             />
           ) : (
             <img
               src={fileUrl}
               alt={filename}
-              className="max-w-full mx-auto bg-white border border-kzn-line rounded"
+              className="max-w-full mx-auto bg-white border border-brand-line rounded"
             />
           )}
         </div>

@@ -37,13 +37,15 @@ class DocumentRecord(BaseModel):
     doc_id: str
     filename: str
     file_size: int
-    file_type: str  # pdf | jpg | png
+    file_type: str  # pdf | jpg | png | doc | docx
     status: DocumentStatus
     created_at: datetime
     updated_at: datetime
     data: Optional[DocumentData] = None
     validation_errors: list[str] = Field(default_factory=list)
     error_message: str = ""
+    retry_count: int = 0
+    completeness: float = 0.0  # 0..1 — доля заполненных полей после распознавания
 
 
 class DocumentUpdate(BaseModel):

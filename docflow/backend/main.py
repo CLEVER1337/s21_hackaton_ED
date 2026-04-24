@@ -119,6 +119,62 @@ def _check_limits(file_type: str, size: int) -> None:
         raise HTTPException(413, detail=f"Изображение превышает лимит {MAX_IMG_SIZE // 1024 // 1024}MB")
 
 
+MAX_AUTO_RETRIES = int(os.environ.get("MAX_AUTO_RETRIES", 3))
+
+
+def _is_retryable(exc: BaseException) -> bool:
+    """Treat 429 / timeout / connection errors as retryable."""
+    if isinstance(exc, asyncio.TimeoutError):
+        return True
+    text = str(exc).lower()
+    markers = (
+        "429",
+        "too many requests",
+        "timeout",
+        "timed out",
+        "rate limit",
+        "temporarily unavailable",
+        "503",
+        "502",
+        "504",
+        "connection reset",
+        "connection aborted",
+        "remote disconnected",
+    )
+    return any(m in text for m in markers)
+
+
+def _compute_completeness(data: DocumentData) -> float:
+    """Share of filled fields among the expected schema (0..1)."""
+    main_fields = [
+        data.document_type,
+        data.document_number,
+        data.document_date,
+        data.supplier_name,
+        data.supplier_inn,
+        data.buyer_name,
+        data.buyer_inn,
+        data.total_amount,
+        data.vat_amount,
+        data.currency,
+    ]
+    filled = sum(1 for v in main_fields if str(v).strip())
+    total = len(main_fields)
+
+    if data.items:
+        item_total = 0
+        item_filled = 0
+        for it in data.items:
+            for v in (it.name, it.quantity, it.unit, it.unit_price, it.total_price):
+                item_total += 1
+                if str(v).strip():
+                    item_filled += 1
+        filled += item_filled
+        total += item_total
+
+    return round(filled / total, 4) if total else 0.0
+
+
 async def _process_document_background(doc_id: str) -> None:
     lock = _doc_lock(doc_id)
     async with lock:
@@ -133,41 +189,77 @@ async def _process_document_background(doc_id: str) -> None:
                 error_message="Файл не найден на диске",
             )
             return
-        try:
-            async with asyncio.timeout(PROCESS_TIMEOUT_SECONDS):
-                raw = await gigachat_client.process_document(
-                    str(upload_path), record.file_type
+
+        # Reset state for a fresh (re)processing run
+        await storage.update_document(
+            doc_id,
+            status="processing",
+            error_message="",
+            retry_count=0,
+        )
+
+        last_error: Optional[str] = None
+        attempts = 1 + MAX_AUTO_RETRIES  # первая попытка + 3 авто-ретрая
+        raw: Optional[dict] = None
+
+        for attempt in range(1, attempts + 1):
+            try:
+                async with asyncio.timeout(PROCESS_TIMEOUT_SECONDS):
+                    raw = await gigachat_client.process_document(
+                        str(upload_path), record.file_type
+                    )
+                last_error = None
+                break
+            except asyncio.TimeoutError as exc:
+                last_error = f"Таймаут (>{PROCESS_TIMEOUT_SECONDS} сек)"
+                logger.warning(
+                    "Timeout %s attempt %d/%d", doc_id, attempt, attempts
                 )
-        except asyncio.TimeoutError:
-            logger.error("Timeout processing %s", doc_id)
+                if attempt == attempts:
+                    break
+            except GigaChatError as exc:
+                last_error = str(exc)
+                logger.warning(
+                    "GigaChatError %s attempt %d/%d: %s",
+                    doc_id, attempt, attempts, exc,
+                )
+                if not _is_retryable(exc) or attempt == attempts:
+                    break
+            except Exception as exc:  # pragma: no cover
+                last_error = f"Непредвиденная ошибка: {exc}"
+                logger.exception(
+                    "Unexpected error %s attempt %d/%d", doc_id, attempt, attempts
+                )
+                if not _is_retryable(exc) or attempt == attempts:
+                    break
+
+            # backoff before next retry
+            await storage.update_document(doc_id, retry_count=attempt)
+            await asyncio.sleep(min(2 ** attempt, 10))
+
+        if raw is None:
             await storage.update_document(
                 doc_id,
                 status="error",
-                error_message="Таймаут обработки документа (>120 сек)",
-            )
-            return
-        except GigaChatError as exc:
-            logger.error("GigaChat error for %s: %s", doc_id, exc)
-            await storage.update_document(
-                doc_id, status="error", error_message=str(exc)
-            )
-            return
-        except Exception as exc:  # pragma: no cover - defensive
-            logger.exception("Unexpected error for %s: %s", doc_id, exc)
-            await storage.update_document(
-                doc_id, status="error", error_message=f"Непредвиденная ошибка: {exc}"
+                error_message=(
+                    f"Не удалось обработать документ после {attempts} попыток. "
+                    f"Последняя ошибка: {last_error or 'неизвестно'}"
+                ),
+                retry_count=attempts,
             )
             return
 
         validated, errors = validate_document(raw or {})
+        completeness = _compute_completeness(validated)
         logger.info(
-            "Document %s parsed: number=%s supplier=%s total=%s items=%d errors=%d",
+            "Document %s parsed: number=%s supplier=%s total=%s items=%d errors=%d completeness=%.2f",
             doc_id,
             validated.document_number,
             validated.supplier_name,
             validated.total_amount,
             len(validated.items),
             len(errors),
+            completeness,
         )
         await storage.update_document(
             doc_id,
@@ -175,6 +267,7 @@ async def _process_document_background(doc_id: str) -> None:
             data=validated,
             validation_errors=errors,
             error_message="",
+            completeness=completeness,
         )
 
 
@@ -203,7 +296,7 @@ async def upload_documents(files: list[UploadFile] = File(...)) -> dict:
         if file_type not in ALLOWED_EXTS:
             raise HTTPException(
                 400,
-                f"Неподдерживаемый формат: {upload.filename}. Разрешены PDF, JPG, PNG",
+                f"Неподдерживаемый формат: {upload.filename}. Разрешены PDF, DOC, DOCX, JPG, PNG",
             )
         _check_limits(file_type, size)
         sizes.append(size)
@@ -270,6 +363,8 @@ async def patch_document(doc_id: str, update: DocumentUpdate) -> dict:
         raise HTTPException(400, "Ожидается поле data")
 
     validated, errors = validate_document(update.data.model_dump())
+    # completeness is a quality signal of the AI extraction, so we keep
+    # the original value from the automatic run and don't recompute on edits.
     updated = await storage.update_document(
         doc_id,
         data=validated,
@@ -278,6 +373,108 @@ async def patch_document(doc_id: str, update: DocumentUpdate) -> dict:
     )
     assert updated is not None
     return updated.model_dump(mode="json")
+
+
+@app.post("/api/documents/{doc_id}/retry")
+async def retry_document(doc_id: str) -> dict:
+    record = await storage.get_document(doc_id)
+    if not record:
+        raise HTTPException(404, "Документ не найден")
+    if record.status == "processing":
+        raise HTTPException(409, "Документ уже обрабатывается")
+    upload_path = storage.find_upload_path(doc_id)
+    if not upload_path or not upload_path.exists():
+        raise HTTPException(409, "Оригинальный файл отсутствует — повторная обработка невозможна")
+
+    await storage.update_document(
+        doc_id,
+        status="processing",
+        error_message="",
+        retry_count=0,
+    )
+    asyncio.create_task(_process_document_background(doc_id))
+    refreshed = await storage.get_document(doc_id)
+    return refreshed.model_dump(mode="json") if refreshed else {"doc_id": doc_id}
+
+
+@app.get("/api/stats")
+async def stats() -> dict:
+    records = await storage.list_documents()
+    total = len(records)
+    by_status: dict[str, int] = {}
+    by_type: dict[str, int] = {}
+    completeness_values: list[float] = []
+    approved_count = 0
+    error_count = 0
+    retries_used = 0
+    recent: list[dict] = []
+
+    for r in records:
+        by_status[r.status] = by_status.get(r.status, 0) + 1
+        by_type[r.file_type] = by_type.get(r.file_type, 0) + 1
+        retries_used += r.retry_count or 0
+        if r.status == "approved":
+            approved_count += 1
+        if r.status == "error":
+            error_count += 1
+        if r.status in ("ready", "approved") and r.completeness:
+            completeness_values.append(r.completeness)
+
+    avg = (
+        round(sum(completeness_values) / len(completeness_values), 4)
+        if completeness_values
+        else 0.0
+    )
+
+    # top/bottom by completeness
+    ranked = sorted(
+        [r for r in records if r.status in ("ready", "approved")],
+        key=lambda r: r.completeness,
+        reverse=True,
+    )
+    best = [
+        {
+            "doc_id": r.doc_id,
+            "filename": r.filename,
+            "completeness": r.completeness,
+            "document_number": r.data.document_number if r.data else "",
+        }
+        for r in ranked[:5]
+    ]
+    worst = [
+        {
+            "doc_id": r.doc_id,
+            "filename": r.filename,
+            "completeness": r.completeness,
+            "document_number": r.data.document_number if r.data else "",
+        }
+        for r in ranked[-5:][::-1]
+    ]
+
+    for r in records[:10]:
+        recent.append(
+            {
+                "doc_id": r.doc_id,
+                "filename": r.filename,
+                "status": r.status,
+                "completeness": r.completeness,
+                "retry_count": r.retry_count,
+                "updated_at": r.updated_at.isoformat(),
+            }
+        )
+
+    return {
+        "total": total,
+        "approved": approved_count,
+        "errors": error_count,
+        "by_status": by_status,
+        "by_type": by_type,
+        "avg_completeness": avg,
+        "retries_used": retries_used,
+        "best": best,
+        "worst": worst,
+        "recent": recent,
+    }
 
 
 @app.post("/api/documents/{doc_id}/approve")

@@ -57,15 +57,15 @@ export default function FileDropZone({ onFiles, disabled }) {
         onClick={() => !disabled && inputRef.current?.click()}
         className={`cursor-pointer select-none border-2 border-dashed rounded-xl p-10 text-center transition ${
           active
-            ? 'border-kzn-green bg-kzn-green/10'
-            : 'border-kzn-line bg-white hover:border-kzn-green hover:bg-kzn-green/5'
+            ? 'border-brand-blue bg-brand-blue/10'
+            : 'border-brand-line bg-white hover:border-brand-blue hover:bg-brand-blue/5'
         } ${disabled ? 'opacity-60 pointer-events-none' : ''}`}
       >
-        <div className="text-kzn-green text-5xl leading-none mb-3">⇪</div>
-        <div className="text-lg font-medium text-kzn-ink">
+        <div className="text-brand-blue text-5xl leading-none mb-3">⇪</div>
+        <div className="text-lg font-medium text-brand-ink">
           Перетащите PDF / DOC / DOCX / JPG / PNG сюда
         </div>
-        <div className="text-sm text-kzn-muted mt-1">
+        <div className="text-sm text-brand-muted mt-1">
           или нажмите, чтобы выбрать файлы · до 40MB документ / 15MB изображение
         </div>
         <input

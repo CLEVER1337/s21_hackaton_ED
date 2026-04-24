@@ -1,0 +1,26 @@
+{
+  "doc_id": "041dda773ac44bd09e2138b60c3cc806",
+  "filename": "ШК 57 К (2025).pdf",
+  "file_size": 2174274,
+  "file_type": "pdf",
+  "status": "error",
+  "created_at": "2026-04-24T10:02:31.302259",
+  "updated_at": "2026-04-24T10:02:46.887929",
+  "data": {
+    "document_type": "",
+    "document_number": "",
+    "document_date": "",
+    "supplier_name": "",
+    "supplier_inn": "",
+    "buyer_name": "",
+    "buyer_inn": "",
+    "total_amount": "",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": []
+  },
+  "validation_errors": [],
+  "error_message": "Не удалось обработать документ после 4 попыток. Последняя ошибка: Сбой GigaChat API: 429 https://ngw.devices.sberbank.ru:9443/api/v2/oauth: b'<html>\\r\\n<head><title>429 Too Many Requests</title></head>\\r\\n<body>\\r\\n<center><h1>429 Too Many Requests</h1></center>\\r\\n<hr><center>SynGX</center>\\r\\n</body>\\r\\n</html>\\r\\n', Headers({'server': 'SynGX', 'date': 'Fri, 24 Apr 2026 10:02:46 GMT', 'content-type': 'text/html', 'content-length': '162', 'connection': 'keep-alive', 'allow': 'GET, POST', 'strict-transport-security': 'max-age=31536000; includeSubDomains'})",
+  "retry_count": 4,
+  "completeness": 0.0
+}

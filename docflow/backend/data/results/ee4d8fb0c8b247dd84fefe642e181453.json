@@ -1,0 +1,26 @@
+{
+  "doc_id": "ee4d8fb0c8b247dd84fefe642e181453",
+  "filename": "17889,75-cф№ 215517 от 23.03.2026-хозтовары.pdf",
+  "file_size": 1969494,
+  "file_type": "pdf",
+  "status": "error",
+  "created_at": "2026-04-24T10:02:31.302259",
+  "updated_at": "2026-04-24T10:04:06.084482",
+  "data": {
+    "document_type": "",
+    "document_number": "",
+    "document_date": "",
+    "supplier_name": "",
+    "supplier_inn": "",
+    "buyer_name": "",
+    "buyer_inn": "",
+    "total_amount": "",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": []
+  },
+  "validation_errors": [],
+  "error_message": "Не удалось обработать документ после 4 попыток. Последняя ошибка: Сбой GigaChat API: The read operation timed out",
+  "retry_count": 4,
+  "completeness": 0.0
+}

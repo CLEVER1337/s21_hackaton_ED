@@ -81,9 +81,9 @@ export default function VerifyForm({
       {FIELD_GROUPS.map((group) => (
         <section
           key={group.title}
-          className="bg-white rounded-lg border border-kzn-line p-4 shadow-card"
+          className="bg-white rounded-lg border border-brand-line p-4 shadow-card"
         >
-          <h3 className="text-sm font-semibold text-kzn-green mb-3 uppercase tracking-wide">
+          <h3 className="text-sm font-semibold text-brand-blue mb-3 uppercase tracking-wide">
             {group.title}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -97,11 +97,11 @@ export default function VerifyForm({
                 validationError || (missing && !filled ? MISSING_HINT : '');
               return (
                 <div key={f.key}>
-                  <label className="flex items-center gap-2 text-xs font-medium text-kzn-muted mb-1">
+                  <label className="flex items-center gap-2 text-xs font-medium text-brand-muted mb-1">
                     {f.label}
                     {missing && !filled && (
-                      <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wide text-kzn-red font-semibold">
-                        <span className="w-1.5 h-1.5 rounded-full bg-kzn-red" />
+                      <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wide text-brand-error font-semibold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-brand-error" />
                         Не распознано
                       </span>
                     )}
@@ -112,10 +112,10 @@ export default function VerifyForm({
                       value={data[f.key] || ''}
                       onChange={(e) => onChange(f.key, e.target.value)}
                       placeholder={missing ? 'Заполните вручную' : ''}
-                      className={`w-full px-3 py-2 rounded-md border text-sm focus:outline-none focus:ring-2 focus:ring-kzn-green/40 ${
+                      className={`w-full px-3 py-2 rounded-md border text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue/40 ${
                         showRed
                           ? 'border-red-500 bg-red-50 placeholder-red-400'
-                          : 'border-kzn-line bg-white'
+                          : 'border-brand-line bg-white'
                       }`}
                     />
                   </ValidationTooltip>
@@ -126,14 +126,14 @@ export default function VerifyForm({
         </section>
       ))}
 
-      <section className="bg-white rounded-lg border border-kzn-line p-4 shadow-card">
+      <section className="bg-white rounded-lg border border-brand-line p-4 shadow-card">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-semibold text-kzn-green uppercase tracking-wide">
+          <h3 className="text-sm font-semibold text-brand-blue uppercase tracking-wide">
             Товары / услуги
           </h3>
           <button
             onClick={onAddItem}
-            className="text-xs px-2.5 py-1 rounded-md bg-kzn-green text-white hover:bg-kzn-green-dark"
+            className="text-xs px-2.5 py-1 rounded-md bg-brand-blue text-white hover:bg-brand-navy"
           >
             + строка
           </button>
@@ -141,7 +141,7 @@ export default function VerifyForm({
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-xs text-kzn-muted uppercase">
+              <tr className="text-left text-xs text-brand-muted uppercase">
                 {ITEM_COLUMNS.map((c) => (
                   <th key={c.key} className={c.className}>
                     {c.label}
@@ -152,7 +152,7 @@ export default function VerifyForm({
             </thead>
             <tbody>
               {(data.items || []).map((item, idx) => (
-                <tr key={idx} className="border-t border-kzn-line">
+                <tr key={idx} className="border-t border-brand-line">
                   {ITEM_COLUMNS.map((c) => {
                     const missing = missingInItem(idx, c.key);
                     const filled = !isEmpty(item[c.key]);
@@ -166,10 +166,10 @@ export default function VerifyForm({
                             onChange={(e) =>
                               onItemChange(idx, c.key, e.target.value)
                             }
-                            className={`w-full px-2 py-1.5 rounded border text-sm focus:outline-none focus:ring-2 focus:ring-kzn-green/40 ${
+                            className={`w-full px-2 py-1.5 rounded border text-sm focus:outline-none focus:ring-2 focus:ring-brand-blue/40 ${
                               showRed
                                 ? 'border-red-500 bg-red-50 placeholder-red-400'
-                                : 'border-kzn-line bg-white'
+                                : 'border-brand-line bg-white'
                             }`}
                           />
                         </ValidationTooltip>
@@ -179,7 +179,7 @@ export default function VerifyForm({
                   <td className="py-1 pl-2 text-right">
                     <button
                       onClick={() => onRemoveItem(idx)}
-                      className="text-kzn-red hover:text-kzn-red-dark text-lg leading-none"
+                      className="text-brand-error hover:text-brand-error-dark text-lg leading-none"
                       title="Удалить строку"
                     >
                       ×
@@ -189,7 +189,7 @@ export default function VerifyForm({
               ))}
               {(data.items || []).length === 0 && (
                 <tr>
-                  <td colSpan={ITEM_COLUMNS.length + 1} className="py-4 text-center text-kzn-muted">
+                  <td colSpan={ITEM_COLUMNS.length + 1} className="py-4 text-center text-brand-muted">
                     Нет строк — таблица не распознана или документ без позиций.
                   </td>
                 </tr>
