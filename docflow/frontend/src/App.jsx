@@ -14,7 +14,7 @@ export default function App() {
       <header className="bg-brand-blue text-white shadow-card">
         <div className="max-w-6xl mx-auto px-6 py-3 flex items-center gap-4">
           <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="DocFlow" className="w-9 h-9 bg-white/10 rounded p-1" />
+            <img src={logo} alt="DocFlow" className="w-12 h-12 bg-white/10 rounded p-1" />
             <div className="leading-tight">
               <div className="text-lg font-semibold">DocFlow AI</div>
               <div className="text-xs text-white/70">
