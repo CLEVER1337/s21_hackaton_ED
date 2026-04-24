@@ -1,0 +1,62 @@
+{
+  "doc_id": "95aa296dc2f64959b618d569425d47b0",
+  "filename": "Детский сад 156, 2023 год 48900,00.pdf",
+  "file_size": 641776,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T13:11:33.245208",
+  "updated_at": "2026-04-24T13:11:51.241174",
+  "data": {
+    "document_type": "накладная",
+    "document_number": "191",
+    "document_date": "30.10.2023",
+    "supplier_name": "ООО \"Номи\"",
+    "supplier_inn": "1656047847",
+    "buyer_name": "МАДОУ \"Детский сад № 156 комбинированного вида\" Приволжского района г. Казани",
+    "buyer_inn": "1659026933",
+    "total_amount": "48900.00",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Стенка детская «Кухня» угловая",
+        "quantity": "1",
+        "unit": "шт",
+        "unit_price": "15000.00",
+        "total_price": "15000.00"
+      },
+      {
+        "name": "ЗЛавочка детская для раздевания 1300-300-300",
+        "quantity": "8",
+        "unit": "шт",
+        "unit_price": "1800.00",
+        "total_price": "14400.00"
+      },
+      {
+        "name": "Шкаф для пособий 800-400-1800",
+        "quantity": "1",
+        "unit": "шт",
+        "unit_price": "6000.00",
+        "total_price": "6000.00"
+      },
+      {
+        "name": "Стенка для пособий",
+        "quantity": "",
+        "unit": "шт",
+        "unit_price": "8500.00",
+        "total_price": "8500.00"
+      },
+      {
+        "name": "Комплект игровой (стол, 3 стула)",
+        "quantity": "",
+        "unit": "шт",
+        "unit_price": "5080.00",
+        "total_price": "5000.00"
+      }
+    ]
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 0,
+  "completeness": 0.9143
+}

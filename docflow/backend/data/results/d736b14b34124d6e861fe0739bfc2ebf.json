@@ -1,0 +1,71 @@
+{
+  "doc_id": "d736b14b34124d6e861fe0739bfc2ebf",
+  "filename": "167дс-38630,90 (2024).pdf",
+  "file_size": 210184,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T14:45:51.289273",
+  "updated_at": "2026-04-24T14:46:16.735924",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "Ф000002245",
+    "document_date": "22.10.2024",
+    "supplier_name": "Индивидуальный предприниматель Фаткуллин Эдуард Сагитович",
+    "supplier_inn": "",
+    "buyer_name": "МАДОУ \"Детский сад №167 комбинированного вида с татарским языком воспитания и обучения\" Советского района г.Казани",
+    "buyer_inn": "1660033910",
+    "total_amount": "36304.00",
+    "vat_amount": "6050.67",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Nuoka 300мл миксы 009072",
+        "quantity": "28",
+        "unit": "шт",
+        "unit_price": "3.35",
+        "total_price": "93.80"
+      },
+      {
+        "name": "Тюбик 175мл мини МАКИ для крафта",
+        "quantity": "70",
+        "unit": "шт",
+        "unit_price": "68.52",
+        "total_price": "4796.40"
+      },
+      {
+        "name": "086422 кружка стеклянная \"Verona 0.25л (апельсиновый)",
+        "quantity": "80",
+        "unit": "шт",
+        "unit_price": "27.13",
+        "total_price": "2170.40"
+      },
+      {
+        "name": "Кружка 250мл Волна керамическая в металлической ТУМВ750 Коралл",
+        "quantity": "50",
+        "unit": "шт",
+        "unit_price": "74.71",
+        "total_price": "3735.50"
+      },
+      {
+        "name": "Котел 24,5л (G 33 см h 20см ) ОБЩЕПИТ КТ-06-24 в",
+        "quantity": "",
+        "unit": "шт",
+        "unit_price": "5375.52",
+        "total_price": "5375.52"
+      },
+      {
+        "name": "Хаспросеть 35,0л ф35мм с ТРВ 3/4\" Alli 2033",
+        "quantity": "",
+        "unit": "шт",
+        "unit_price": "8033.00",
+        "total_price": "8033.00"
+      }
+    ]
+  },
+  "validation_errors": [
+    "supplier_inn: неверный формат ИНН (ожидается 10 или 12 цифр)"
+  ],
+  "error_message": "",
+  "retry_count": 0,
+  "completeness": 0.925
+}

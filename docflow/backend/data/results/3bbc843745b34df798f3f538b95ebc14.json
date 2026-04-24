@@ -1,0 +1,26 @@
+{
+  "doc_id": "3bbc843745b34df798f3f538b95ebc14",
+  "filename": "352д.с.Вагихзов А.Ф.20223,00счет-фактура.pdf",
+  "file_size": 841774,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T17:01:29.479132",
+  "updated_at": "2026-04-24T17:01:42.441916",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "352д.с.",
+    "document_date": "01.03.2022",
+    "supplier_name": "МУНИЦИПАЛЬНОЕ АВТОНОМНОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ \"ДЕТСКИЙ САД №352 КОМБИНИРОВАННОГО ВИДА\" СОВЕТСКОГО РАЙОНА Г.КАЗАНИ",
+    "supplier_inn": "1650801010",
+    "buyer_name": "Вагихзов А.Ф.",
+    "buyer_inn": "",
+    "total_amount": "3000.00",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": []
+  },
+  "validation_errors": [],
+  "error_message": "",
+  "retry_count": 0,
+  "completeness": 0.8
+}

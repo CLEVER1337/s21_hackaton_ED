@@ -1,0 +1,36 @@
+{
+  "doc_id": "eb063f4724c3415ca1eab5be6d586348",
+  "filename": "Детский сад 23, 2023 год 2100,00.pdf",
+  "file_size": 162286,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T13:11:33.245208",
+  "updated_at": "2026-04-24T13:11:54.380927",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "93",
+    "document_date": "09.11.2023",
+    "supplier_name": "Индивидуальный предприниматель Бикмухаметов Аргур Фгворисович",
+    "supplier_inn": "164491469015",
+    "buyer_name": "МУНИЦИПАЛЬНОЕ АВТОНОМНОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ДЕТСКИЙ САД № 23 КОМБИНИРОВАННОГО ВИДА С ВОСПИТАНИЕМ И ОБУЧЕНИЕМ НА ТАТАРСКОМ ЯЗЫКЕ\" ПРИВОЛЖСКОГО РАЙОНА Г.КАЗАНИ",
+    "buyer_inn": "1659027278",
+    "total_amount": "2100.00",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "Колонки Компьютерные Defender SPK 170",
+        "quantity": "3",
+        "unit": "шт",
+        "unit_price": "700.00",
+        "total_price": "2100.00"
+      }
+    ]
+  },
+  "validation_errors": [
+    "vat_amount: не удалось распознать сумму НДС"
+  ],
+  "error_message": "",
+  "retry_count": 1,
+  "completeness": 0.9333
+}

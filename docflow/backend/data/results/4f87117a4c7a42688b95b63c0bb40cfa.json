@@ -1,0 +1,29 @@
+{
+  "doc_id": "4f87117a4c7a42688b95b63c0bb40cfa",
+  "filename": "Дс 407 А 24г.pdf",
+  "file_size": 141522,
+  "file_type": "pdf",
+  "status": "approved",
+  "created_at": "2026-04-24T14:04:42.132032",
+  "updated_at": "2026-04-24T14:05:23.750212",
+  "data": {
+    "document_type": "счёт-фактура",
+    "document_number": "LDYINtey102AORVA",
+    "document_date": "31.10.2024",
+    "supplier_name": "Управление образования Исполнительного комитета муниципального образования города",
+    "supplier_inn": "",
+    "buyer_name": "МУНИЦИПАЛЬНОЕ АВТОНОМНОЕ ДОШКОЛЬНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ \"ДЕТСКИЙ САД № 407\"",
+    "buyer_inn": "",
+    "total_amount": "765765.00",
+    "vat_amount": "7657657.00",
+    "currency": "RUB",
+    "items": []
+  },
+  "validation_errors": [
+    "supplier_inn: неверный формат ИНН (ожидается 10 или 12 цифр)",
+    "buyer_inn: неверный формат ИНН (ожидается 10 или 12 цифр)"
+  ],
+  "error_message": "",
+  "retry_count": 0,
+  "completeness": 0.6
+}

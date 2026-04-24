@@ -1,0 +1,50 @@
+{
+  "doc_id": "3555f0ab386542a7a7666fd98f9a28f0",
+  "filename": "133-5382,00.pdf",
+  "file_size": 744559,
+  "file_type": "pdf",
+  "status": "ready",
+  "created_at": "2026-04-24T17:12:25.233502",
+  "updated_at": "2026-04-24T17:12:39.152440",
+  "data": {
+    "document_type": "накладная",
+    "document_number": "4042",
+    "document_date": "27.03.2025",
+    "supplier_name": "Индивидуальный предприниматель Прокопьева Екатерина Сергеевна",
+    "supplier_inn": "165708875909",
+    "buyer_name": "МБОУ \"ЛИЦЕЙ №133\"",
+    "buyer_inn": "1684020028",
+    "total_amount": "5382.02",
+    "vat_amount": "",
+    "currency": "RUB",
+    "items": [
+      {
+        "name": "тетрадь 100шт",
+        "quantity": "9",
+        "unit": "шт",
+        "unit_price": "352.00",
+        "total_price": "3168.00"
+      },
+      {
+        "name": "гуаш 6цв",
+        "quantity": "12",
+        "unit": "шт",
+        "unit_price": "161.50",
+        "total_price": "1938.00"
+      },
+      {
+        "name": "мел цветной 10цв",
+        "quantity": "2",
+        "unit": "шт",
+        "unit_price": "138.01",
+        "total_price": "276.02"
+      }
+    ]
+  },
+  "validation_errors": [
+    "vat_amount: не удалось распознать сумму НДС"
+  ],
+  "error_message": "",
+  "retry_count": 0,
+  "completeness": 0.96
+}
